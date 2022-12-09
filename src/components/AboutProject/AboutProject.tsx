@@ -3,7 +3,6 @@ import styles from './AboutProject.module.scss';
 
 const {
   about,
-  about__title,
   about__wrapper,
   about__textColumn,
   about__subtitle,

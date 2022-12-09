@@ -1,7 +1,9 @@
 import { useRef } from 'react';
 import AboutProject from '../../components/AboutProject/AboutProject';
-import Promo from '../../components/Header/Promo';
+import Promo from '../../components/Promo/Promo';
 import NavTab from '../../components/NavTab/NavTab';
+import Techs from '../../components/Techs/Techs';
+import Student from '../../components/Student/Student';
 
 const Main = () => {
   const navigateToProject = useRef<HTMLElement | null>(null);
@@ -18,6 +20,8 @@ const Main = () => {
           navigateToProject={navigateToProject}
         />
         <AboutProject />
+        <Techs navigateToStack={navigateToStack} />
+        <Student />
       </main>
     </>
   );

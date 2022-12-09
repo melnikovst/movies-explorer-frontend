@@ -1,4 +1,5 @@
-import { TNavTab } from '../../@types/propsTypes/props';
+import { MutableRefObject } from 'react';
+import { TNavTab } from '../../@types/props';
 
 import styles from './NavTab.module.scss';
 
@@ -9,8 +10,8 @@ const NavTab: React.FC<TNavTab> = ({
   navigateToStack,
   navigateToStudent,
 }) => {
-  const navigateHandler = (ref: any) => {
-    ref.current.scrollIntoView({ behavior: 'smooth' });
+  const navigateHandler = (ref: MutableRefObject<HTMLElement | null>) => {
+    ref!.current!.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

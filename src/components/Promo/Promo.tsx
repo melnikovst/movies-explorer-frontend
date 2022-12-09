@@ -2,7 +2,7 @@ import logo from '../../images/header-main-logo.png';
 import styles from './Promo.module.scss';
 import { NavLink } from 'react-router-dom';
 import { FC } from 'react';
-import { TProjectRef } from '../../@types/propsTypes/props';
+import { TProjectRef } from '../../@types/props';
 
 const {
   header,
