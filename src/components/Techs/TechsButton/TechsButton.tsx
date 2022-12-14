@@ -7,13 +7,30 @@ const TechsButton: FC<{
   classes: string;
   onHandleClick: () => void;
   open: Dispatch<SetStateAction<number | null>>;
-}> = ({ description, title, classes, onHandleClick, open }) => {
-  console.log(open);
-
+  img: string;
+  imgClasses: string;
+}> = ({
+  description,
+  title,
+  classes,
+  onHandleClick,
+  open,
+  img,
+  imgClasses,
+}) => {
   return (
-    <div onClick={onHandleClick} className={classes}>
+    <li onClick={onHandleClick} className={classes}>
+      <img
+        onClick={(e) => {
+          e.stopPropagation();
+          open(null);
+        }}
+        className={imgClasses}
+        src={img}
+        alt={title}
+      />
       <button className="techs__btn">{title}</button>
-      <div
+      <p
         onClick={(e) => {
           e.stopPropagation();
           open(null);
@@ -21,8 +38,8 @@ const TechsButton: FC<{
         className="techs__btn techs__back"
       >
         {description}
-      </div>
-    </div>
+      </p>
+    </li>
   );
 };
 

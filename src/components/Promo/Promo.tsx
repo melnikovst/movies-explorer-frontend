@@ -2,7 +2,6 @@ import logo from '../../images/header-main-logo.png';
 import styles from './Promo.module.scss';
 import { NavLink } from 'react-router-dom';
 import { FC } from 'react';
-import { TProjectRef } from '../../@types/props';
 
 const {
   header,
@@ -13,9 +12,9 @@ const {
   header__navButtonActive,
 } = styles;
 
-const Promo: FC<TProjectRef> = ({ navigateToProject }) => {
+const Promo: FC = () => {
   return (
-    <header ref={navigateToProject} className={header}>
+    <header className={header}>
       <div className={header__wrapper}>
         <img src={logo} alt="" className={logotype} />
         <nav>

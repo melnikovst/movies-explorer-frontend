@@ -1,8 +1,11 @@
 import { FC } from 'react';
-import styles from './SectionTitle.module.scss';
+import './SectionTitle.scss';
 
-const SectionTitle: FC<{ title: string }> = ({ title }) => {
-  return <h2 className={styles.title}>{title}</h2>;
+const SectionTitle: FC<{ title: string; className: string }> = ({
+  title,
+  className,
+}) => {
+  return <h2 className={className}>{title}</h2>;
 };
 
 export default SectionTitle;

@@ -1,3 +1,4 @@
+import { TProjectRef } from '../../@types/props';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import styles from './AboutProject.module.scss';
 
@@ -17,11 +18,11 @@ const {
   about__whiteSide,
 } = styles;
 
-const AboutProject = () => {
+const AboutProject: React.FC<TProjectRef> = ({ navigateToProject }) => {
   return (
-    <section className={about}>
+    <section ref={navigateToProject} className={about}>
       <div className={about__inner}>
-        <SectionTitle title="О проекте" />
+        <SectionTitle className="title" title="О проекте" />
         <div className={about__wrapper}>
           <div className={about__textColumn}>
             <h3 className={about__subtitle}>
