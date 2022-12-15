@@ -1,10 +1,10 @@
 import { useRef } from 'react';
-import AboutProject from '../../components/AboutProject/AboutProject';
-import Promo from '../../components/Promo/Promo';
-import NavTab from '../../components/NavTab/NavTab';
-import Techs from '../../components/Techs/Techs';
-import Student from '../../components/Student/Student';
-import Footer from '../../components/Footer/Footer';
+import AboutProject from '../../components/Main/AboutProject/AboutProject';
+import Promo from '../../components/Main/Promo/Promo';
+import NavTab from '../../components/Main/NavTab/NavTab';
+import Techs from '../../components/Main/Techs/Techs';
+import Student from '../../components/Main/Student/Student';
+import Footer from '../../components/Main/Footer/Footer';
 
 const Main = () => {
   const navigateToProject = useRef<HTMLElement | null>(null);

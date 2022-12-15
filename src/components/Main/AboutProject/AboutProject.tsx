@@ -1,6 +1,6 @@
-import { TProjectRef } from '../../@types/props';
-import SectionTitle from '../SectionTitle/SectionTitle';
-import styles from './AboutProject.module.scss';
+import SectionTitle from "../SectionTitle/SectionTitle";
+import styles from "./AboutProject.module.scss";
+import React from "react";
 
 const {
   about,
@@ -18,7 +18,9 @@ const {
   about__whiteSide,
 } = styles;
 
-const AboutProject: React.FC<TProjectRef> = ({ navigateToProject }) => {
+const AboutProject: React.FC<{
+  navigateToProject: React.MutableRefObject<HTMLElement | null>;
+}> = ({ navigateToProject }) => {
   return (
     <section ref={navigateToProject} className={about}>
       <div className={about__inner}>

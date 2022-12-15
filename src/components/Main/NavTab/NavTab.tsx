@@ -1,5 +1,5 @@
 import { MutableRefObject } from 'react';
-import { TNavTab } from '../../@types/props';
+import { TNavTab } from '../../../@types/props';
 
 import styles from './NavTab.module.scss';
 

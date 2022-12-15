@@ -1,17 +1,17 @@
-import { LegacyRef } from 'react';
-import SectionTitle from '../SectionTitle/SectionTitle';
-import './Student.scss';
-import vitalik from './vitalik.png';
+import React, { MutableRefObject } from "react";
+import SectionTitle from "../SectionTitle/SectionTitle";
+import "./Student.scss";
+import vitalik from "./vitalik.png";
 
 const array = [
-  'Статичный сайт',
-  'Адаптивный сайт',
-  'Одностраничное приложение',
+  "Статичный сайт",
+  "Адаптивный сайт",
+  "Одностраничное приложение",
 ];
 
-const Student: React.FC<{ navigateToStudent: LegacyRef<HTMLElement> }> = ({
-  navigateToStudent,
-}) => {
+const Student: React.FC<{
+  navigateToStudent: MutableRefObject<HTMLElement | null>;
+}> = ({ navigateToStudent }) => {
   return (
     <section ref={navigateToStudent} className="student">
       <div className="student__inner">

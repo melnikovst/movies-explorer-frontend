@@ -1,5 +1,5 @@
 import { LegacyRef, useState } from 'react';
-import SectionTitle from '../SectionTitle/SectionTitle';
+/* import SectionTitle from '../SectionTitle/SectionTitle'; */
 import './Techs.scss';
 import TechsButton from './TechsButton/TechsButton';
 import git from './git.png';
@@ -59,7 +59,7 @@ const Techs: React.FC<{
   return (
     <section ref={navigateToStack} className="techs">
       <div className="techs__inner">
-        <SectionTitle className="title" title="Технологии" />
+        {/* <SectionTitle className="title" title="Технологии" /> */}
         <div className="techs__content-wrapper">
           <h2 className="techs__title">7 технологий</h2>
           <p className="techs__subtitle">
