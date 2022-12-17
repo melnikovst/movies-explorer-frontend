@@ -16,6 +16,10 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+
+    a {
+      margin: 18px 0 0 0;
+    }
   }
 
   &__nav-wrapper {
@@ -47,9 +51,10 @@
     display: flex;
     column-gap: 20px;
     list-style: none;
-    margin: 20px 0 0;
+    margin: 23px 0 0;
     padding: 0;
     align-items: center;
+    height: fit-content;
 
     li {
       height: fit-content;

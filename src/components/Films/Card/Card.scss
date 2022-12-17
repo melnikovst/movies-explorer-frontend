@@ -1,0 +1,53 @@
+.card {
+  width: 270px;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0 0;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #E8E8E8;
+  }
+
+  &__like {
+    width: 24px;
+    height: 24px;
+    background-color: #F9F9F9;
+    border-radius: 36px;
+    background-image: url("./like.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: transform .3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &_active {
+      background-image: url("./likeActive.svg");
+    }
+  }
+
+  &__description {
+    margin: 0;
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+  }
+
+  &__duration {
+    margin: 6px 0 0;
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    color: #A0A0A0;
+  }
+}
