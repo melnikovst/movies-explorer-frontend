@@ -1,6 +1,11 @@
 .header {
-  background-color: #000;
+  background-color: #fff;
   height: 74px;
+
+  &_type_forms {
+    padding: 52px 0 40px 0;
+    height: 100%;
+  }
 
   &__logo-container {
     background-color: #f9f9f9;
@@ -29,7 +34,7 @@
 
   &__img-description {
     font-family: 'Inter', Arial, serif;
-    color: #fff;
+    color: #000;
     margin: 0;
     font-style: normal;
     font-weight: 500;
@@ -62,7 +67,7 @@
   }
 
   &__link {
-    color: #fff;
+    color: #000;
     font-family: 'Inter', serif;
     font-style: normal;
     font-weight: 500;

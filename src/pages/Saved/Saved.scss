@@ -1,0 +1,12 @@
+.saved {
+  padding: 14px 0 140px 0;
+  &__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  &__container {
+    display: flex;
+    column-gap: 20px;
+  }
+}
