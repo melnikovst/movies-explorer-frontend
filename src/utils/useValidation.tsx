@@ -7,10 +7,8 @@ type Values = {
   id?: any;
 };
 
-type Errors = {
-  regName: string;
-  regEmail: string;
-  regPassword: string;
+type Errors<T> = {
+  [key: string]: T;
 };
 
 export function useFormAndValidation() {
@@ -19,11 +17,7 @@ export function useFormAndValidation() {
     name: "",
     password: "",
   });
-  const [errors, setErrors] = useState<Errors>({
-    regName: "",
-    regPassword: "",
-    regEmail: "",
-  });
+  const [errors, setErrors] = useState<Errors<string | undefined>>({});
   const [isValid, setIsValid] = useState<boolean>(true);
 
   const handleChange = (e: { target: { id: string; value: string } }) => {
@@ -44,7 +38,7 @@ export function useFormAndValidation() {
         name: "",
         password: "",
       },
-      newErrors: Errors = { regName: "", regPassword: "", regEmail: "" },
+      newErrors = {},
       newIsValid = false
     ) => {
       setValues(newValues);
