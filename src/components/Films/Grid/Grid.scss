@@ -1,6 +1,8 @@
+@import '../../../utils/mixins.scss', '../../../utils/variables.scss';
+
 .grid {
   padding-top: 80px;
-  background-color: #fff;
+  background-color: $color-white;
 
   &__inner {
     max-width: 1140px;
@@ -21,15 +23,13 @@
     width: 320px;
     align-self: center;
     height: 36px;
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 500;
+    @include font-normal($mid);
     font-size: 12px;
     line-height: 15px;
     text-align: center;
-    color: #000;
+    color: $color-black;
     background-color: transparent;
-    border: 1px solid #E8E8E8;
+    border: 1px solid $color-light-grey;
     border-radius: 6px;
   }
 }

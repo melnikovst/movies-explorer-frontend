@@ -1,6 +1,8 @@
+@import '../../../utils/mixins.scss', '../../../utils/variables.scss';
+
 .promo {
   min-height: 598px;
-  background-color: #f3c1f8;
+  background-color: $color-pink;
   background-image: url('./images/bg-pic-header.png');
   background-repeat: no-repeat;
   background-position: center;
@@ -31,32 +33,27 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
+    @include font-normal($mid);
     font-size: 12px;
     line-height: 16px;
     height: 100%;
-    color: #000000;
   }
 
   &__navButtonActive {
     height: 32px;
-    background-color: black;
-    color: #fff;
+    background-color: $color-black;
+    color: $color-white;
     border-radius: 3px;
     padding: 0 20px;
   }
 
   &__title {
     text-align: center;
-    font-family: 'Inter';
-    font-weight: 400;
+    @include font-normal($small);
     font-size: 50px;
     line-height: 58px;
     text-align: center;
     letter-spacing: -0.04em;
-    font-style: normal;
     margin: 184px auto;
     max-width: 730px;
   }

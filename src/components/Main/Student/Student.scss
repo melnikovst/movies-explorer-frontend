@@ -1,5 +1,7 @@
+@import '../../../utils/mixins.scss', '../../../utils/variables.scss';
+
 .student {
-  background-color: #FFFFFF;
+  background-color: $color-white;
   padding: 0 0 125px 0;
 
   &__inner {
@@ -20,34 +22,25 @@
   }
 
   &__title {
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 400;
+    @include font-normal($small);
     font-size: 50px;
     line-height: 58px;
     letter-spacing: -0.04em;
-    color: #000;
     margin: 0;
   }
 
   &__subtitle {
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 500;
+    @include font-normal($mid);
     font-size: 18px;
     line-height: 20px;
-    color: #000;
     mix-blend-mode: normal;
     margin: 0;
   }
 
   &__description {
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 400;
+    @include font-normal($small);
     font-size: 14px;
     line-height: 22px;
-    color: #000;
     mix-blend-mode: normal;
     margin: 0;
   }
@@ -55,13 +48,10 @@
   &__project {
     margin: 0;
     padding: 0;
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 400;
+    @include font-normal($small, $color-grey);
     font-size: 18px;
     line-height: 20px;
     list-style: none;
-    color: #a0a0a0;
     mix-blend-mode: normal;
 
     li:first-of-type {

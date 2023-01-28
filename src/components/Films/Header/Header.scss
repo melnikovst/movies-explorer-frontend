@@ -1,5 +1,7 @@
+@import '../../../utils/mixins.scss', '../../../utils/variables.scss';
+
 .header {
-  background-color: #fff;
+  background-color: $color-white;
   height: 74px;
 
   &_type_forms {
@@ -8,7 +10,7 @@
   }
 
   &__logo-container {
-    background-color: #f9f9f9;
+    background-color: $color-f9;
     width: 30px;
     height: 30px;
     display: flex;
@@ -33,11 +35,9 @@
   }
 
   &__img-description {
-    font-family: 'Inter', Arial, serif;
-    color: #000;
+    @include font-normal($mid);
+    color: $color-black;
     margin: 0;
-    font-style: normal;
-    font-weight: 500;
     font-size: 14px;
     line-height: 16px;
     display: flex;
@@ -67,10 +67,8 @@
   }
 
   &__link {
-    color: #000;
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 500;
+    color: $color-black;
+    @include font-normal($mid);
     font-size: 14px;
     line-height: 18px;
     text-align: right;

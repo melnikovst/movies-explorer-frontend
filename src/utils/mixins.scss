@@ -1,0 +1,6 @@
+@mixin font-normal($size, $color: #000) {
+  font-family: 'Inter', serif;
+  font-style: normal;
+  font-weight: $size;
+  color: $color;
+}

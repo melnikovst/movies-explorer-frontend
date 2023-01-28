@@ -1,3 +1,5 @@
+@import '../../../../utils/mixins.scss', '../../../../utils/variables.scss';
+
 .hovered {
   transition: 0.7s ease-in-out;
   transform-style: preserve-3d;
@@ -38,9 +40,7 @@
   height: 100%;
   padding: 0;
   border-radius: 10px;
-  font-family: 'Inter', serif;
-  font-style: normal;
-  font-weight: 400;
+  @include font-normal($small);
   font-size: 14px;
   line-height: 17px;
   text-align: center;
@@ -49,10 +49,10 @@
   cursor: pointer;
   transition: all 0.7s ease;
   border: none;
-  background-color: #E8E8E8;
+  background-color: $color-light-grey;
 
   &:hover {
-    background-color: #F3C1F8;
+    background-color: $color-pink;
   }
 }
 
@@ -65,12 +65,11 @@
   width: 180px;
   height: 135px;
   transform: rotateY(0.5turn);
-  background-color: #E8E8E8;
-  color: #000;
+  background-color: $color-light-grey;
   margin: 0;
   top: 60px;
 
   &:hover {
-    background-color: #F3C1F8;
+    background-color: $color-pink;
   }
 }

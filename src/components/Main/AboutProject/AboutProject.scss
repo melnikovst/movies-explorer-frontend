@@ -1,5 +1,7 @@
+@import '../../../utils/mixins.scss', '../../../utils/variables.scss';
+
 .about {
-  background-color: #ffffff;
+  background-color: $color-white;
 
   &__inner {
     max-width: 1140px;
@@ -17,23 +19,17 @@
   }
 
   &__subtitle {
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 400;
+    @include font-normal($small);
     font-size: 20px;
     line-height: 24px;
     letter-spacing: -0.04em;
-    color: #000;
     margin: 0 0 26px 0;
   }
 
   &__description {
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 400;
+    @include font-normal($small);
     font-size: 14px;
     line-height: 20px;
-    color: #000;
     margin: 0;
   }
 
@@ -49,41 +45,32 @@
     width: 912px;
     display: flex;
     height: 36px;
-    background-color: #f3c1f8;
+    background-color: $color-pink;
     justify-content: center;
     align-items: center;
     margin: 0;
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    color: #000000;
+    @include font-normal($small);
   }
 
   &__blackSide {
     width: 228px;
     display: flex;
     height: 36px;
-    background-color: #161616;
+    background-color: $color-dark-grey;
     justify-content: center;
     align-items: center;
     margin: 0;
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    color: #fff;
+    @include font-normal($small, $color-white);
   }
 
   &__text {
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 500;
+    @include font-normal($mid, $color-grey);
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    color: #a0a0a0;
   }
 }

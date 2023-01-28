@@ -1,10 +1,10 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback } from 'react';
 
 type Values = {
   email?: string;
   name?: string;
   password?: string;
-  id?: any;
+  id?: string;
 };
 
 type Errors<T> = {
@@ -13,14 +13,14 @@ type Errors<T> = {
 
 export function useFormAndValidation() {
   const [values, setValues] = useState<Values>({
-    email: "",
-    name: "",
-    password: "",
+    email: '',
+    name: '',
+    password: '',
   });
   const [errors, setErrors] = useState<Errors<string | undefined>>({});
   const [isValid, setIsValid] = useState<boolean>(true);
 
-  const handleChange = (e: { target: { id: string; value: string } }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setValues({ ...values, [id]: value });
   };
@@ -28,15 +28,15 @@ export function useFormAndValidation() {
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
     setErrors({ ...errors, [id]: e.target.validationMessage });
-    setIsValid((e.target as HTMLElement).closest("form")!.checkValidity());
+    setIsValid((e.target as HTMLElement).closest('form')!.checkValidity());
   };
 
   const resetForm = useCallback(
     (
       newValues: Values = {
-        email: "",
-        name: "",
-        password: "",
+        email: '',
+        name: '',
+        password: '',
       },
       newErrors = {},
       newIsValid = false

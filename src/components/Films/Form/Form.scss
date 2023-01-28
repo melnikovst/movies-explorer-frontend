@@ -1,11 +1,13 @@
+@import '../../../utils/variables.scss', '../../../utils/mixins.scss';
+
 .search {
-  background-color: #fff;
+  background-color: $color-white;
 
   &__inner {
     margin: 0 auto;
     max-width: 1140px;
     padding: 70px 0;
-    border-bottom: 1px solid #E8E8E8;
+    border-bottom: 1px solid $color-light-grey;
   }
 
   &__form {
@@ -15,7 +17,7 @@
 
   &__input {
     width: calc(100% - 61px);
-    background: #F9F9F9;
+    background: $color-f9;
     border-radius: 9px;
     height: 72px;
     margin: 0;
@@ -25,7 +27,7 @@
 
   &__image {
     position: absolute;
-    background-image: url("./lupa.svg");
+    background-image: url('./lupa.svg');
     width: 34px;
     height: 34px;
     background-repeat: no-repeat;
@@ -38,7 +40,7 @@
     position: absolute;
     top: 19px;
     right: 257px;
-    background-color: #000000;
+    background-color: $color-black;
     border-radius: 48px;
     width: 80px;
     height: 34px;
@@ -54,17 +56,15 @@
       height: 40px;
       right: -30px;
       bottom: -2px;
-      background-color: #E8E8E8;
+      background-color: $color-light-grey;
     }
   }
 
   &__text {
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 400;
+    @include font-normal($small);
     font-size: 13px;
     line-height: 18px;
-    color: #000000;
+    color: $color-black;
     position: absolute;
     top: 27px;
     right: 30px;
@@ -72,7 +72,10 @@
   }
 }
 
-.toggler-wrapper input[type="checkbox"]:checked+.toggler-slider .toggler-knob {
+.toggler-wrapper
+  input[type='checkbox']:checked
+  + .toggler-slider
+  .toggler-knob {
   left: calc(100% - 19px);
 }
 
@@ -82,20 +85,20 @@
   border-radius: 50%;
   left: 0;
   top: 1px;
-  background-color: #F3C1F8;
-  border: 1px solid #F3C1F8;
+  background-color: $color-pink;
+  border: 1px solid $color-pink;
 }
 
-.toggler-wrapper input[type="checkbox"] {
+.toggler-wrapper input[type='checkbox'] {
   display: none;
 }
 
-.toggler-wrapper input[type="checkbox"]:checked+.toggler-slider {
-  background-color: #000;
+.toggler-wrapper input[type='checkbox']:checked + .toggler-slider {
+  background-color: $color-black;
 }
 
 .toggler-wrapper .toggler-slider {
-  background-color: #ccc;
+  background-color: $color-c;
   position: absolute;
   border-radius: 100px;
   top: 26px;

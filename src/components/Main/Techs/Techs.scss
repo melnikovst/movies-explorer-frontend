@@ -1,5 +1,7 @@
+@import '../../../utils/mixins.scss', '../../../utils/variables.scss';
+
 .techs {
-  background-color: #F5F5F5;
+  background-color: $color-prewhite;
   padding-bottom: 100px;
 
   &__inner {
@@ -15,27 +17,21 @@
   }
 
   &__title {
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 400;
+    @include font-normal($small);
     font-size: 50px;
     line-height: 58px;
     text-align: center;
     letter-spacing: -0.04em;
-    color: #000;
     max-width: 600px;
     margin: 20px 0 26px 0;
   }
 
   &__subtitle {
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 400;
+    @include font-normal($small);
     font-size: 14px;
     line-height: 20px;
     text-align: center;
     letter-spacing: -0.04em;
-    color: #000;
     margin: 0 0 100px 0;
     max-width: 460px;
   }

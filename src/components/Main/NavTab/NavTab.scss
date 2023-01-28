@@ -1,28 +1,27 @@
+@import '../../../utils/mixins.scss', '../../../utils/variables.scss';
+
 .nav {
-  background-color: #ffffff;
+  background-color: $color-white;
   display: flex;
   justify-content: center;
   align-items: center;
 
   &__wrapper {
     width: 100%;
-    background-color: #000;
+    background-color: $color-black;
     display: flex;
     justify-content: center;
     column-gap: 40px;
   }
 
   &__btn {
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 500;
+    @include font-normal($mid, $color-white);
     font-size: 13px;
     line-height: 16px;
     display: flex;
     align-items: center;
     text-decoration: underline;
     background-color: transparent;
-    color: #fff;
     padding: 24px 0;
 
     &:hover {
