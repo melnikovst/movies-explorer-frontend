@@ -1,7 +1,11 @@
 @import '../../../utils/variables.scss', '../../../utils/mixins.scss';
 
 .card {
-  width: 270px;
+  width: 100%;
+
+  img {
+    width: 100%;
+  }
 
   &__wrapper {
     display: flex;

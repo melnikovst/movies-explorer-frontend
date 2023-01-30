@@ -1,17 +1,18 @@
 @import '../../../utils/mixins.scss', '../../../utils/variables.scss';
 
 .grid {
-  padding-top: 80px;
   background-color: $color-white;
 
   &__inner {
-    max-width: 1140px;
-    margin: 0 auto;
+    @include inner;
     display: flex;
     flex-direction: column;
+    max-width: 1140px;
   }
 
   &__container {
+    border-top: 1px solid $color-light-grey;
+    padding-top: 80px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 38px 20px;

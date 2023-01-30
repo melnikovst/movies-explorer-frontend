@@ -5,20 +5,20 @@ import { FC } from 'react';
 
 const Promo: FC = () => {
   return (
-    <header className='promo'>
+    <header className="promo">
       <div className="promo__inner">
-        <div className='promo__wrapper'>
-          <img src={logo} alt="" className='logotype' />
+        <div className="promo__wrapper">
+          <img src={logo} alt="" className="logotype" />
           <nav>
-            <ul className='promo__navContainer'>
+            <ul className="promo__navContainer">
               <li>
-                <NavLink className='promo__navButton' to={'/'}>
+                <NavLink className="promo__navButton" to={'/'}>
                   Регистрация
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  className='promo__navButton promo__navButtonActive'
+                  className="promo__navButton promo__navButtonActive"
                   to={'/films'}
                 >
                   Войти
@@ -27,7 +27,7 @@ const Promo: FC = () => {
             </ul>
           </nav>
         </div>
-        <h1 className='promo__title'>
+        <h1 className="promo__title">
           Учебный проект студента факультета Веб-разработки.
         </h1>
       </div>

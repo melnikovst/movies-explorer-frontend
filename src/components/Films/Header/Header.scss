@@ -20,7 +20,7 @@
 
   &__inner {
     max-width: 1140px;
-    margin: 0 auto;
+    @include inner;
     display: flex;
     justify-content: space-between;
 
@@ -74,4 +74,8 @@
     text-align: right;
     text-decoration: none;
   }
+}
+
+.hide {
+  display: none;
 }

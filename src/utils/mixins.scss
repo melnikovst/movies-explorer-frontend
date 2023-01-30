@@ -4,3 +4,8 @@
   font-weight: $size;
   color: $color;
 }
+
+@mixin inner {
+  margin: 0 auto;
+  padding: 0 70px;
+}

@@ -6,6 +6,7 @@
   &__inner {
     max-width: 1140px;
     margin: 0 auto;
+    padding: 0 70px;
   }
 
   &__wrapper {
@@ -41,8 +42,12 @@
     display: flex;
   }
 
+  &__rightContainer {
+    width: 100%;
+  }
+
   &__whiteSide {
-    width: 912px;
+    max-width: 912px;
     display: flex;
     height: 36px;
     background-color: $color-pink;
