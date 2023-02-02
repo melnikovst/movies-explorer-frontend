@@ -7,6 +7,11 @@
   width: 90px;
   height: 60px;
 
+  @media screen and (max-width: 900px) {
+    width: 84px;
+    height: 57px;
+  }
+
   .img {
     position: absolute;
     top: 0;
@@ -50,24 +55,6 @@
   transition: all 0.7s ease;
   border: none;
   background-color: $color-light-grey;
-
-  &:hover {
-    background-color: $color-pink;
-  }
-}
-
-.techs__back {
-  position: relative;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 180px;
-  height: 135px;
-  transform: rotateY(0.5turn);
-  background-color: $color-light-grey;
-  margin: 0;
-  top: 60px;
 
   &:hover {
     background-color: $color-pink;

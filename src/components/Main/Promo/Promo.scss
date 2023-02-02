@@ -8,16 +8,32 @@
   background-position: center;
   background-size: 320px 320px;
 
+  @media screen and (max-width: 900px) {
+    height: 858px;
+  }
+
+  @media screen and (max-width: 500px) {
+    height: 354px;
+  }
+
   &__inner {
     max-width: 1280px;
-    @include inner;
+    padding-top: 21px;
+    margin: 0 auto;
   }
 
   &__wrapper {
     display: flex;
     justify-content: space-between;
     margin: 0 70px;
-    padding-top: 18px;
+
+    @media screen and (max-width: 900px) {
+      margin: 0 30px;
+    }
+
+    @media screen and (max-width: 500px) {
+      margin: 0 14px;
+    }
   }
 
   &__navContainer {
@@ -48,7 +64,6 @@
   }
 
   &__title {
-    text-align: center;
     @include font-normal($small);
     font-size: 50px;
     line-height: 58px;
@@ -56,6 +71,16 @@
     letter-spacing: -0.04em;
     margin: 184px auto;
     max-width: 730px;
+
+    @media screen and (max-width: 900px) {
+      margin: 326px 30px 342px 30px;
+    }
+
+    @media screen and (max-width: 500px) {
+      font-size: 31px;
+      line-height: 39px;
+      margin: 207px 10px 246px 10px;
+    }
   }
 }
 

@@ -1,44 +1,39 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import './TechsButton.scss';
 
-const TechsButton: FC<{
-  description: string;
+interface ITButton {
   title: string;
   classes: string;
   onHandleClick: () => void;
-  open: Dispatch<SetStateAction<number | null>>;
+  setOpen: Dispatch<SetStateAction<number | null>>;
   img: string;
   imgClasses: string;
-}> = ({
-  description,
+  open: number | null;
+}
+
+const TechsButton: FC<ITButton> = ({
   title,
   classes,
   onHandleClick,
   open,
   img,
   imgClasses,
+  setOpen,
 }) => {
+  console.log(open);
+
   return (
     <li onClick={onHandleClick} className={classes}>
       <img
         onClick={(e) => {
           e.stopPropagation();
-          open(null);
+          setOpen(null);
         }}
         className={imgClasses}
         src={img}
         alt={title}
       />
       <button className="techs__btn">{title}</button>
-      <p
-        onClick={(e) => {
-          e.stopPropagation();
-          open(null);
-        }}
-        className="techs__btn techs__back"
-      >
-        {description}
-      </p>
     </li>
   );
 };

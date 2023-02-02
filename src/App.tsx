@@ -6,15 +6,18 @@ import Footer from './components/Main/Footer/Footer';
 import NotFound from './pages/NotFound/NotFound';
 import Profile from './pages/Profile/Profile';
 import Header from './components/Films/Header/Header';
+import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
 
 function App() {
   const { pathname } = useLocation();
-  console.log(typeof pathname);
+  console.log(pathname);
   return (
     <div
       className={
-        pathname === ('/sign-in' || 'sign-up') ? 'App_type_forms' : 'App'
+        pathname === '/sign-in' || pathname === '/sign-up'
+          ? 'App_type_forms'
+          : 'App'
       }
     >
       {pathname !== ('/' || '/sign-in' || '/sign-up') && <Header />}
@@ -22,8 +25,9 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/films/*" element={<Films />} />
         <Route path="*" element={<NotFound />} />
-        <Route path={'profile'} element={<Profile />} />
-        <Route path={'/sign-in'} element={<Login />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="/sign-up" element={<Register />} />
+        <Route path="/sign-in" element={<Login />} />
       </Routes>
       {pathname === '/' ||
       pathname === '/films' ||

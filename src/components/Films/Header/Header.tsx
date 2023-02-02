@@ -18,9 +18,7 @@ const Header = () => {
     <header className={handleHeader()}>
       <div
         style={
-          pathname === '/profile' ||
-          pathname === '/sign-in' ||
-          pathname === '/sign-up'
+          pathname === '/sign-in' || pathname === '/sign-up'
             ? { paddingLeft: 0 }
             : {}
         }
@@ -29,11 +27,15 @@ const Header = () => {
         <Link to={'/'}>
           <img src={logo} alt="" className="header__logo" />
         </Link>
-        {pathname !== '/sign-in' && (
+        {pathname === '/sign-in' || pathname === '/sign-up' ? null : (
           <div className="header__nav-wrapper">
             <ul className="header__nav">
               <li>
-                <Link to={'/sign-in'} className="header__link">
+                <Link
+                  to={'/films'}
+                  style={pathname === '/films' ? { display: 'none' } : {}}
+                  className="header__link"
+                >
                   Фильмы
                 </Link>
               </li>

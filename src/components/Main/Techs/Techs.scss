@@ -4,10 +4,17 @@
   background-color: $color-prewhite;
   padding-bottom: 100px;
 
+  @media screen and (max-width: 900px) {
+    padding-bottom: 90px;
+  }
+
   &__inner {
     max-width: 1140px;
     margin: 0 auto;
     padding: 0 70px;
+
+    @include inner-media-main;
+    @include inner-media-main(18px, 500px);
   }
 
   &__content-wrapper {
@@ -42,6 +49,17 @@
     padding: 0;
     margin: 0;
     list-style: none;
-    column-gap: 10px;
+    gap: 10px;
+
+    @media screen and (max-width: 700px) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    @media screen and (max-width: 500px) {
+      margin: 0 auto;
+      max-width: 178px;
+      justify-content: start;
+    }
   }
 }

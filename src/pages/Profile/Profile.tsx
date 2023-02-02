@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import "./Profile.scss";
+import { Link } from 'react-router-dom';
+import './Profile.scss';
 const Profile = () => {
   return (
     <section className="profile">
@@ -27,7 +27,9 @@ const Profile = () => {
             className="form__name form__input"
           />
         </fieldset>
-        <button className="form__btn">Редактировать</button>
+        <Link to="/sign-up" className="form__btn">
+          Редактировать
+        </Link>
       </form>
       <Link to="/" className="profile__btn">
         Выйти из аккаунта

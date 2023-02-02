@@ -1,49 +1,42 @@
-import React, { LegacyRef, useState } from "react";
-import SectionTitle from "../SectionTitle/SectionTitle";
-import "./Techs.scss";
-import TechsButton from "./TechsButton/TechsButton";
-import git from "./git.png";
-import react from "./react.png";
-import ts from "./typescript-2.svg";
-import sass from "./sass.png";
-import html from "./HTML.png";
-import express from "./express.jpeg";
-import mongo from "./mongodb.png";
+import React, { LegacyRef, useState } from 'react';
+import SectionTitle from '../SectionTitle/SectionTitle';
+import './Techs.scss';
+import TechsButton from './TechsButton/TechsButton';
+import git from './git.png';
+import react from './react.png';
+import ts from './typescript-2.svg';
+import sass from './sass.png';
+import html from './HTML.png';
+import express from './express.jpeg';
+import mongo from './mongodb.png';
 
-const btns: { title: string; desc: string; img: string }[] = [
+const btns: { title: string; img: string }[] = [
   {
-    title: "HTML",
-    desc: "HTML — стандартизированный язык гипертекстовой разметки документов для просмотра веб-страниц в браузере.",
+    title: 'HTML',
     img: html,
   },
   {
-    title: "SCSS",
-    desc: "Scss является наиболее развитым и стабильным расширением CSS профессионального уровня.",
+    title: 'SCSS',
     img: sass,
   },
   {
-    title: "TS",
-    desc: "TypeScript — это язык программирования со строгой типизацией, в котором исправлены многие недостатки JavaScript.",
+    title: 'TS',
     img: ts,
   },
   {
-    title: "React",
-    desc: "React — это JavaScript-библиотека для создания пользовательских интерфейсов.",
+    title: 'React',
     img: react,
   },
   {
-    title: "Git",
-    desc: "Git — это развитая система контроля версий с активной поддержкой и открытым исходным кодом, которую используют тысячи разработчиков из разных точек мира.",
+    title: 'Git',
     img: git,
   },
   {
-    title: "Express.js",
-    desc: "Express представляет собой популярный веб-фреймворк, написанный на JavaScript и работающий внутри среды исполнения node.js.",
+    title: 'Express.js',
     img: express,
   },
   {
-    title: "mongoDB",
-    desc: "MongoDB — документоориентированная система управления базами данных, не требующая описания схемы таблиц. Считается одним из классических примеров NoSQL-систем",
+    title: 'mongoDB',
     img: mongo,
   },
 ];
@@ -69,14 +62,14 @@ const Techs: React.FC<{
           <ul className="techs__btns">
             {btns.map((text, i) => (
               <TechsButton
-                open={setOpen}
-                classes={open === i ? "hovered hovered_clicked" : "hovered"}
-                imgClasses={open === i ? "img img_active" : "img"}
+                open={open}
+                setOpen={setOpen}
+                classes={open === i ? 'hovered hovered_clicked' : 'hovered'}
+                imgClasses={open === i ? 'img img_active' : 'img'}
                 onHandleClick={() => {
                   handleClick(i);
                 }}
                 key={i}
-                description={text.desc}
                 title={text.title}
                 img={text.img}
               />
