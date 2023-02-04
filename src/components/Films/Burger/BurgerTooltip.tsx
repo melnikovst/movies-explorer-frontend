@@ -1,8 +1,10 @@
 import './BurgerTooltip.scss';
+import '../Header/Header.scss';
+import AccKey from '../Header/AccKey.png';
 import { useResize } from '../../../utils/hooks/useResize';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { setIsAsideOpen } from '../../../redux/tooltipSlice';
 import { useState } from 'react';
 
@@ -47,6 +49,12 @@ const BurgerTooltip = () => {
             </NavLink>
           ))}
         </nav>
+        <Link to={'/profile'} className="header__account">
+          <p className="header__img-description">Аккаунт</p>
+          <div className="header__logo-container">
+            <img src={AccKey} alt="" className="header__img" />
+          </div>
+        </Link>
       </div>
     </aside>
   );

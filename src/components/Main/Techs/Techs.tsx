@@ -9,6 +9,9 @@ import sass from './sass.png';
 import html from './HTML.png';
 import express from './express.jpeg';
 import mongo from './mongodb.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { setIsTechOpen } from '../../../redux/tooltipSlice';
 
 const btns: { title: string; img: string }[] = [
   {
@@ -44,10 +47,11 @@ const btns: { title: string; img: string }[] = [
 const Techs: React.FC<{
   navigateToStack: LegacyRef<HTMLElement> | undefined;
 }> = ({ navigateToStack }) => {
-  const [open, setOpen] = useState<number | null>(null);
+  const dispatch = useDispatch();
   const handleClick = (index: number) => {
-    setOpen(index);
+    dispatch(setIsTechOpen(index));
   };
+  const { isTechOpen } = useSelector((state: RootState) => state.tooltipSlice);
 
   return (
     <section ref={navigateToStack} className="techs">
@@ -62,10 +66,10 @@ const Techs: React.FC<{
           <ul className="techs__btns">
             {btns.map((text, i) => (
               <TechsButton
-                open={open}
-                setOpen={setOpen}
-                classes={open === i ? 'hovered hovered_clicked' : 'hovered'}
-                imgClasses={open === i ? 'img img_active' : 'img'}
+                classes={
+                  isTechOpen === i ? 'hovered hovered_clicked' : 'hovered'
+                }
+                imgClasses={isTechOpen === i ? 'img img_active' : 'img'}
                 onHandleClick={() => {
                   handleClick(i);
                 }}

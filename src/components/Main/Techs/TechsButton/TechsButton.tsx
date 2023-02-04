@@ -1,33 +1,31 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/store';
+import { setIsTechOpen } from '../../../../redux/tooltipSlice';
 import './TechsButton.scss';
 
 interface ITButton {
   title: string;
   classes: string;
   onHandleClick: () => void;
-  setOpen: Dispatch<SetStateAction<number | null>>;
   img: string;
   imgClasses: string;
-  open: number | null;
 }
 
 const TechsButton: FC<ITButton> = ({
   title,
   classes,
   onHandleClick,
-  open,
   img,
   imgClasses,
-  setOpen,
 }) => {
-  console.log(open);
-
+  const dispatch = useDispatch();
   return (
     <li onClick={onHandleClick} className={classes}>
       <img
         onClick={(e) => {
           e.stopPropagation();
-          setOpen(null);
+          dispatch(setIsTechOpen(null));
         }}
         className={imgClasses}
         src={img}

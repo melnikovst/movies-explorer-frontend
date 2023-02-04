@@ -21,16 +21,24 @@
 
   &__container {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     width: 68%;
     background-color: rgba($color: #fff, $alpha: 1);
     height: 100%;
     z-index: 7;
+
+    .header__account {
+      margin-bottom: 99px;
+    }
   }
 
   &__wrapper {
     display: flex;
     flex-direction: column;
-    margin: 159px 90px 0 90px;
+    padding: 159px 0 0;
   }
 
   &__link {

@@ -1,7 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+interface IS {
+  isAsideOpen: boolean;
+  isTechOpen: null | number;
+}
+
+const initialState: IS = {
   isAsideOpen: false,
+  isTechOpen: null,
 };
 
 const tooltipSlice = createSlice({
@@ -11,8 +17,11 @@ const tooltipSlice = createSlice({
     setIsAsideOpen(state, action: PayloadAction<boolean>) {
       state.isAsideOpen = action.payload;
     },
+    setIsTechOpen(state, action: PayloadAction<number | null>) {
+      state.isTechOpen = action.payload;
+    },
   },
 });
 
-export const { setIsAsideOpen } = tooltipSlice.actions;
+export const { setIsAsideOpen, setIsTechOpen } = tooltipSlice.actions;
 export default tooltipSlice.reducer;
