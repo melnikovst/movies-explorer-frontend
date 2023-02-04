@@ -8,6 +8,8 @@
     display: flex;
     flex-direction: column;
     max-width: 1140px;
+
+    @include inner-media-main(30px);
   }
 
   &__container {

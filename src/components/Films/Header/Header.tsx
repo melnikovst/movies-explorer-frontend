@@ -1,8 +1,9 @@
 import './Header.scss';
-
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../Main/Promo/images/header-main-logo.png';
 import AccKey from './AccKey.png';
+import Burger from '../Burger/Burger';
+import BurgerTooltip from '../Burger/BurgerTooltip';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -53,6 +54,8 @@ const Header = () => {
             </Link>
           </div>
         )}
+        <Burger />
+        <BurgerTooltip />
       </div>
     </header>
   );

@@ -8,16 +8,18 @@ import Profile from './pages/Profile/Profile';
 import Header from './components/Films/Header/Header';
 import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
+import { useSelector } from 'react-redux';
+import { RootState } from './redux/store';
 
 function App() {
   const { pathname } = useLocation();
-  console.log(pathname);
+  const { isAsideOpen } = useSelector((state: RootState) => state.tooltipSlice);
   return (
     <div
       className={
         pathname === '/sign-in' || pathname === '/sign-up'
           ? 'App_type_forms'
-          : 'App'
+          : `App ${isAsideOpen ? 'App_scroll' : ''}`
       }
     >
       {pathname !== ('/' || '/sign-in' || '/sign-up') && <Header />}

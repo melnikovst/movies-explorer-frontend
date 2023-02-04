@@ -1,4 +1,10 @@
 .App {
+  &_scroll {
+    position: fixed;
+    overflow-y: scroll;
+    width: 100%;
+  }
+
   &_type_forms {
     max-width: 396px;
     margin: 0 auto;

@@ -7,6 +7,10 @@
     margin: 0 auto;
     padding: 70px;
     max-width: 1140px;
+
+    @media screen and (max-width: 900px) {
+      padding: 70px 30px;
+    }
   }
 
   &__form {
