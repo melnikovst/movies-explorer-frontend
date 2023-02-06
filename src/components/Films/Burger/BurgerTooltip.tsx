@@ -1,6 +1,6 @@
 import './BurgerTooltip.scss';
 import '../Header/Header.scss';
-import AccKey from '../Header/AccKey.png';
+import AccKey from '../Header/AccKey.svg';
 import { useResize } from '../../../utils/hooks/useResize';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
@@ -55,7 +55,7 @@ const BurgerTooltip = () => {
         <Link to={'/profile'} className="header__account">
           <p className="header__img-description">Аккаунт</p>
           <div className="header__logo-container">
-            <img src={AccKey} alt="" className="header__img" />
+            <img src={AccKey} alt="Icon account" className="header__img" />
           </div>
         </Link>
       </div>

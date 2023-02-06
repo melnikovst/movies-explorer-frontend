@@ -18,7 +18,7 @@ const Register = () => {
       <h2 className="register__title">Добро пожаловать!</h2>
       <form className="form">
         <fieldset className="fieldset">
-          <label htmlFor="regEmail" className="form__label">
+          <label htmlFor="regName" className="form__label">
             Имя
           </label>
           <input

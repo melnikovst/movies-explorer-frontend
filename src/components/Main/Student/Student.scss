@@ -96,19 +96,27 @@
     line-height: 20px;
     list-style: none;
     mix-blend-mode: normal;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
 
     li:first-of-type {
       margin-top: 50px;
     }
 
     li:last-of-type {
-      .title {
+      .student__link {
         border-bottom: none;
       }
     }
   }
 
   &__link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     text-decoration: none;
+    border-bottom: $color-black 1px solid;
+    padding-bottom: 19px;
   }
 }

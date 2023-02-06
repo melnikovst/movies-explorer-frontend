@@ -15,11 +15,12 @@
 
   &__container {
     border-top: 1px solid $color-light-grey;
-    padding-top: 80px;
+    padding: 80px 0 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 38px 20px;
     justify-items: center;
+    margin: 0;
 
     @media screen and (max-width: 900px) {
       margin-top: 109px;

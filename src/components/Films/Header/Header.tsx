@@ -1,7 +1,7 @@
 import './Header.scss';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../Main/Promo/images/header-main-logo.png';
-import AccKey from './AccKey.png';
+import AccKey from './AccKey.svg';
 import Burger from '../Burger/Burger';
 import BurgerTooltip from '../Burger/BurgerTooltip';
 import cn from '../../../utils/cn';
@@ -23,7 +23,7 @@ const Header = () => {
     <header className={handleHeader()}>
       <div className={cn('header__inner', { header__inner_form: isForm })}>
         <Link to={'/'}>
-          <img src={logo} alt="" className="header__logo" />
+          <img src={logo} alt="header logo" className="header__logo" />
         </Link>
         {pathname === '/sign-in' || pathname === '/sign-up' ? null : (
           <div className="header__nav-wrapper">
@@ -47,7 +47,7 @@ const Header = () => {
             <Link to={'/profile'} className="header__account">
               <p className="header__img-description">Аккаунт</p>
               <div className="header__logo-container">
-                <img src={AccKey} alt="" className="header__img" />
+                <img src={AccKey} alt="Icon account" className="header__img" />
               </div>
             </Link>
           </div>

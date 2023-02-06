@@ -16,7 +16,7 @@ const Grid = () => {
   return (
     <section className="grid">
       <div className="grid__inner">
-        <div className="grid__container">{load}</div>
+        <ul className="grid__container">{load}</ul>
         <button onClick={loadMore} className="grid__button">
           Ещё
         </button>

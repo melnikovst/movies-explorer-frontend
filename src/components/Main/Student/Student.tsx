@@ -2,6 +2,7 @@ import React, { MutableRefObject } from 'react';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import './Student.scss';
 import vitalik from './vitalik.png';
+import arrow from './strelka.svg';
 
 const array = [
   'Статичный сайт',
@@ -28,7 +29,7 @@ const Student: React.FC<{
               заниматься фриланс-заказами и ушёл с постоянной работы.
             </p>
           </div>
-          <img src={vitalik} alt="" className="student__image" />
+          <img src={vitalik} alt="Student" className="student__image" />
         </div>
         <ul className="student__project">
           Портфолио
@@ -40,7 +41,8 @@ const Student: React.FC<{
                 target="_blank"
                 rel="noreferrer"
               >
-                <SectionTitle className="title type_student" title={item} />
+                <SectionTitle className="student__text" title={item} />
+                <img src={arrow} alt="Arrow icon" className="student__img" />
               </a>
             </li>
           ))}

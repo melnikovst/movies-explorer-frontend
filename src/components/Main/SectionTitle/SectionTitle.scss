@@ -15,13 +15,12 @@
   }
 }
 
-.type_student {
-  margin: 0 0 20px 0;
-  padding-top: 0;
-  padding-bottom: 19px;
+.student__text {
   @include font-normal($small);
   font-size: 30px;
   line-height: 50px;
+  letter-spacing: -0.04em;
+  margin: 0;
   letter-spacing: -0.04em;
 
   @media screen and (max-width: 900px) {

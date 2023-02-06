@@ -2,6 +2,7 @@
 
 .card {
   width: 100%;
+  list-style: none;
 
   img {
     width: 100%;
@@ -20,6 +21,7 @@
     height: 24px;
     background-color: $color-f9;
     border-radius: 36px;
+    border: none;
     background-image: url('./like.svg');
     background-repeat: no-repeat;
     background-position: center;
