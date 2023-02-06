@@ -1,15 +1,10 @@
-import "./Footer.scss";
-import { Link, useLocation } from "react-router-dom";
+import './Footer.scss';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
-  const { pathname } = useLocation();
-
   return (
     <footer className="footer">
-      <div
-        style={pathname !== "/" ? { paddingBottom: "56px" } : {}}
-        className="footer__inner"
-      >
+      <div className="footer__inner">
         <p className="footer__description">
           Учебный проект Яндекс.Практикум х BeatFilm.
         </p>
@@ -17,7 +12,7 @@ const Footer = () => {
           <p className="footer__copyright">© 2020</p>
           <div className="footer__links">
             <Link
-              to={"/login"}
+              to={'/login'}
               // target="_blank"
               rel="noreferrer"
               className="footer__link"

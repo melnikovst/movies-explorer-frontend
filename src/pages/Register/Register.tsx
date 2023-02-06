@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import './Register.scss';
-import useFormAndValidation from '../../utils/useValidation';
+import useFormAndValidation from '../../utils/hooks/useValidation';
 import React from 'react';
+import cn from '../../utils/cn';
 
 const Register = () => {
   const { values, handleChange, errors, isValid, handleBlur } =
@@ -29,11 +30,7 @@ const Register = () => {
             defaultValue={values.name}
             minLength={5}
           />
-          <span
-            className={
-              isValid ? 'form__error' : 'form__error form__error_active'
-            }
-          >
+          <span className={cn('form__error', { form__error_active: !isValid })}>
             {errors.regName}
           </span>
           <label htmlFor="regEmail" className="form__label">
@@ -47,11 +44,7 @@ const Register = () => {
             onChange={handleValidation}
             defaultValue={values.email}
           />
-          <span
-            className={
-              isValid ? 'form__error' : 'form__error form__error_active'
-            }
-          >
+          <span className={cn('form__error', { form__error_active: !isValid })}>
             {errors.regEmail}
           </span>
           <label htmlFor="regPassword" className="form__label">
@@ -66,12 +59,8 @@ const Register = () => {
             defaultValue={values.password}
             minLength={10}
           />
-          <span
-            className={
-              isValid ? 'form__error' : 'form__error form__error_active'
-            }
-          >
-            {errors.regPassword}
+          <span className={cn('form__error', { form__error_active: !isValid })}>
+            Что-то пошло не так...
           </span>
         </fieldset>
         <button className="form__button">Зарегестрироваться</button>

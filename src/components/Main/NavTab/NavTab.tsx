@@ -1,8 +1,13 @@
 import React, { MutableRefObject } from 'react';
-import { TNavTab } from '../../../@types/props';
 import './NavTab.scss';
 
-const NavTab: React.FC<TNavTab> = ({
+interface INavTab {
+  navigateToStudent: React.MutableRefObject<HTMLElement | null>;
+  navigateToStack: React.MutableRefObject<HTMLElement | null>;
+  navigateToProject: React.MutableRefObject<HTMLElement | null>;
+}
+
+const NavTab: React.FC<INavTab> = ({
   navigateToProject,
   navigateToStack,
   navigateToStudent,

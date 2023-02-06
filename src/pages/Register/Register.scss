@@ -6,6 +6,12 @@
     font-size: 14px;
     line-height: 17px;
     text-align: center;
+    margin: 14px 0 0 0;
+
+    @media screen and (max-width: 500px) {
+      font-size: 12px;
+      line-height: 15px;
+    }
 
     a {
       @include font-normal($small);
@@ -14,6 +20,11 @@
       text-align: center;
       text-decoration: none;
       margin-left: 6px;
+
+      @media screen and (max-width: 500px) {
+        font-size: 12px;
+        line-height: 15px;
+      }
     }
   }
 
@@ -22,6 +33,10 @@
     @include font-normal($mid);
     font-size: 24px;
     line-height: 29px;
+
+    @media screen and (max-width: 500px) {
+      text-align: center;
+    }
   }
 
   .fieldset {
@@ -81,6 +96,10 @@
       text-align: center;
       margin-top: 69px;
       cursor: pointer;
+
+      @media screen and (max-width: 500px) {
+        margin-top: 157px;
+      }
     }
   }
 }

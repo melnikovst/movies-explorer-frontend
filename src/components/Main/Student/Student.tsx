@@ -1,12 +1,12 @@
-import React, { MutableRefObject } from "react";
-import SectionTitle from "../SectionTitle/SectionTitle";
-import "./Student.scss";
-import vitalik from "./vitalik.png";
+import React, { MutableRefObject } from 'react';
+import SectionTitle from '../SectionTitle/SectionTitle';
+import './Student.scss';
+import vitalik from './vitalik.png';
 
 const array = [
-  "Статичный сайт",
-  "Адаптивный сайт",
-  "Одностраничное приложение",
+  'Статичный сайт',
+  'Адаптивный сайт',
+  'Одностраничное приложение',
 ];
 
 const Student: React.FC<{

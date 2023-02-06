@@ -7,6 +7,7 @@ import { RootState } from '../../../redux/store';
 import { Link, NavLink } from 'react-router-dom';
 import { setIsAsideOpen } from '../../../redux/tooltipSlice';
 import { useState } from 'react';
+import cn from '../../../utils/cn';
 
 interface Arr {
   desc: string;
@@ -31,16 +32,18 @@ const BurgerTooltip = () => {
 
   return (
     <aside
-      style={isScreenLg ? { display: 'none' } : {}}
-      className={`aside ${isAsideOpen ? 'aside_active' : ''}`}
+      className={cn('aside', {
+        aside_active: isAsideOpen,
+        aside_hidden: isScreenLg,
+      })}
     >
       <div className="aside__container">
         <nav className="aside__wrapper">
           {arr.map((text, i) => (
             <NavLink
-              className={`aside__link ${
-                i === isActive ? 'aside__link_active' : ''
-              }`}
+              className={cn('aside__link', {
+                aside__link_active: i === isActive,
+              })}
               to={text.path}
               onClick={() => handleMove(i)}
               key={i}

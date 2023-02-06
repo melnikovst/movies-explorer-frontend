@@ -1,4 +1,4 @@
-import React, { LegacyRef, useState } from 'react';
+import React, { LegacyRef } from 'react';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import './Techs.scss';
 import TechsButton from './TechsButton/TechsButton';
@@ -12,6 +12,7 @@ import mongo from './mongodb.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { setIsTechOpen } from '../../../redux/tooltipSlice';
+import cn from '../../../utils/cn';
 
 const btns: { title: string; img: string }[] = [
   {
@@ -45,10 +46,10 @@ const btns: { title: string; img: string }[] = [
 ];
 
 const Techs: React.FC<{
-  navigateToStack: LegacyRef<HTMLElement> | undefined;
+  navigateToStack: LegacyRef<HTMLElement>;
 }> = ({ navigateToStack }) => {
   const dispatch = useDispatch();
-  const handleClick = (index: number) => {
+  const handleClick = (index: number): void => {
     dispatch(setIsTechOpen(index));
   };
   const { isTechOpen } = useSelector((state: RootState) => state.tooltipSlice);
@@ -66,10 +67,8 @@ const Techs: React.FC<{
           <ul className="techs__btns">
             {btns.map((text, i) => (
               <TechsButton
-                classes={
-                  isTechOpen === i ? 'hovered hovered_clicked' : 'hovered'
-                }
-                imgClasses={isTechOpen === i ? 'img img_active' : 'img'}
+                classes={cn('hovered', { hovered_clicked: isTechOpen === i })}
+                imgClasses={cn('img', { img_active: isTechOpen === i })}
                 onHandleClick={() => {
                   handleClick(i);
                 }}

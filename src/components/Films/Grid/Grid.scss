@@ -10,6 +10,7 @@
     max-width: 1140px;
 
     @include inner-media-main(30px);
+    @include inner-media-main(10px, 600px);
   }
 
   &__container {
@@ -19,6 +20,14 @@
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 38px 20px;
     justify-items: center;
+
+    @media screen and (max-width: 900px) {
+      margin-top: 109px;
+    }
+
+    @media screen and (max-width: 600px) {
+      margin: 0;
+    }
   }
 
   &__button {

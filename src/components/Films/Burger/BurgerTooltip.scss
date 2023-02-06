@@ -19,6 +19,10 @@
     width: 100%;
   }
 
+  &_hidden {
+    display: none;
+  }
+
   &__container {
     position: relative;
     display: flex;
@@ -29,6 +33,10 @@
     background-color: rgba($color: #fff, $alpha: 1);
     height: 100%;
     z-index: 7;
+
+    @media screen and (max-width: 500px) {
+      width: 100%;
+    }
 
     .header__account {
       margin-bottom: 99px;

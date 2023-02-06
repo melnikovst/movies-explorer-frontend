@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import '../Register/Register.scss';
-import useFormAndValidation from '../../utils/useValidation';
+import useFormAndValidation from '../../utils/hooks/useValidation';
 import React from 'react';
+import cn from '../../utils/cn';
 
 const Login = () => {
   const { values, handleChange, errors, isValid, handleBlur } =
@@ -27,11 +28,7 @@ const Login = () => {
             onChange={handleValidation}
             defaultValue={values.email}
           />
-          <span
-            className={
-              isValid ? 'form__error' : 'form__error form__error_active'
-            }
-          >
+          <span className={cn('form__error', { form__error_active: !isValid })}>
             {errors.regEmail}
           </span>
           <label htmlFor="regPassword" className="form__label">
@@ -46,19 +43,15 @@ const Login = () => {
             onBlur={handleValidation}
             minLength={5}
           />
-          <span
-            className={
-              isValid ? 'form__error' : 'form__error form__error_active'
-            }
-          >
-            {errors.regPassword}
+          <span className={cn('form__error', { form__error_active: !isValid })}>
+            Что-то пошло не так...
           </span>
         </fieldset>
         <button className="form__button">Войти</button>
       </form>
       <p className="register__caption">
         Уже зарегестрированы?
-        <Link to="/sign-in">{' Регистрация'}</Link>
+        <Link to="/sign-up">{' Регистрация'}</Link>
       </p>
     </section>
   );

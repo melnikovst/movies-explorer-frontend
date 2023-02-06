@@ -4,6 +4,7 @@ import logo from '../../Main/Promo/images/header-main-logo.png';
 import AccKey from './AccKey.png';
 import Burger from '../Burger/Burger';
 import BurgerTooltip from '../Burger/BurgerTooltip';
+import cn from '../../../utils/cn';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -15,16 +16,12 @@ const Header = () => {
     if (pathname === '/profile') return 'header';
     return 'hide';
   };
+
+  const isForm = pathname === '/sign-in' || pathname === '/sign-up';
+
   return (
     <header className={handleHeader()}>
-      <div
-        style={
-          pathname === '/sign-in' || pathname === '/sign-up'
-            ? { paddingLeft: 0 }
-            : {}
-        }
-        className="header__inner"
-      >
+      <div className={cn('header__inner', { header__inner_form: isForm })}>
         <Link to={'/'}>
           <img src={logo} alt="" className="header__logo" />
         </Link>
@@ -34,8 +31,9 @@ const Header = () => {
               <li>
                 <Link
                   to={'/films'}
-                  style={pathname === '/films' ? { display: 'none' } : {}}
-                  className="header__link"
+                  className={cn('header__link', {
+                    header__link_hidden: pathname === '/films',
+                  })}
                 >
                   Фильмы
                 </Link>

@@ -1,9 +1,9 @@
 import SectionTitle from '../SectionTitle/SectionTitle';
 import './AboutProject.scss';
-import React from 'react';
+import React, { MutableRefObject } from 'react';
 
 const AboutProject: React.FC<{
-  navigateToProject: React.MutableRefObject<HTMLElement | null>;
+  navigateToProject: MutableRefObject<HTMLElement | null>;
 }> = ({ navigateToProject }) => {
   return (
     <section ref={navigateToProject} className="about">

@@ -10,22 +10,27 @@ import Register from './pages/Register/Register';
 import Login from './pages/Login/Login';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store';
+import cn from './utils/cn';
+import Saved from './pages/Saved/Saved';
+import Grid from './components/Films/Grid/Grid';
 
 function App() {
   const { pathname } = useLocation();
   const { isAsideOpen } = useSelector((state: RootState) => state.tooltipSlice);
+
+  const isForm = pathname === '/sign-in' || pathname === '/sign-up';
+
   return (
     <div
-      className={
-        pathname === '/sign-in' || pathname === '/sign-up'
-          ? 'App_type_forms'
-          : `App ${isAsideOpen ? 'App_scroll' : ''}`
-      }
+      className={cn('App', { App_type_forms: isForm, App_scroll: isAsideOpen })}
     >
       {pathname !== ('/' || '/sign-in' || '/sign-up') && <Header />}
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/films/*" element={<Films />} />
+        <Route path="/films" element={<Films />}>
+          <Route path="saved" element={<Saved />}></Route>
+          <Route path="" element={<Grid />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
         <Route path="profile" element={<Profile />} />
         <Route path="/sign-up" element={<Register />} />
