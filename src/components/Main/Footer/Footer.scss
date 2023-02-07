@@ -1,0 +1,66 @@
+@import '../../../utils/mixins.scss', '../../../utils/variables.scss';
+
+.footer {
+  background-color: $color-white;
+
+  &__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 70px;
+
+    @include inner-media-main;
+    @include inner-media-main(10px, 500px);
+  }
+
+  &__description {
+    width: 100%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $color-grey;
+    margin: 0;
+    @include font-normal($small, $color-grey);
+    font-size: 13px;
+    text-align: center;
+    line-height: 16px;
+
+    @media screen and (max-width: 500px) {
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
+
+  &__wrapper {
+    margin: 20px 0 0 0;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: 500px) {
+      flex-direction: column-reverse;
+      align-items: center;
+      row-gap: 30px;
+    }
+  }
+
+  &__links {
+    display: flex;
+    column-gap: 20px;
+
+    @media screen and (max-width: 500px) {
+      flex-direction: column;
+      align-items: center;
+      row-gap: 12px;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    @include font-normal($small);
+    font-size: 13px;
+    line-height: 16px;
+    text-align: right;
+  }
+
+  &__copyright {
+    margin: 0;
+  }
+}

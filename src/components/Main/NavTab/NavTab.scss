@@ -1,0 +1,32 @@
+@import '../../../utils/mixins.scss', '../../../utils/variables.scss';
+
+.nav {
+  background-color: $color-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__wrapper {
+    width: 100%;
+    background-color: $color-black;
+    display: flex;
+    justify-content: center;
+    column-gap: 40px;
+  }
+
+  &__btn {
+    @include font-normal($mid, $color-white);
+    font-size: 13px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-decoration: underline;
+    background-color: transparent;
+    padding: 0;
+    margin: 25px 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@mixin font-normal($size, $color: #000) {
+  font-family: 'Inter', serif;
+  font-style: normal;
+  font-weight: $size;
+  color: $color;
+}
+
+@mixin inner {
+  margin: 0 auto;
+  padding: 0 70px;
+}
+
+@mixin inner-media-main($width: 50px, $media: 900px) {
+  @media screen and (max-width: $media) {
+    padding: 0 $width;
+  }
+}

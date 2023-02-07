@@ -1,0 +1,63 @@
+@import '../../../utils/variables.scss', '../../../utils/mixins.scss';
+
+.aside {
+  visibility: hidden;
+  display: flex;
+  height: 100vh;
+  justify-content: flex-end;
+  left: 0;
+  top: 0;
+  position: fixed;
+  width: 0;
+  z-index: 2;
+  transition: visibility 0.3s, width 0.3s linear;
+  overflow: hidden;
+
+  &_active {
+    background-color: rgba($color: #000000, $alpha: 0.3);
+    visibility: visible;
+    width: 100%;
+  }
+
+  &_hidden {
+    display: none;
+  }
+
+  &__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 68%;
+    background-color: rgba($color: #fff, $alpha: 1);
+    height: 100%;
+    z-index: 7;
+
+    @media screen and (max-width: 500px) {
+      width: 100%;
+    }
+
+    .header__account {
+      margin-bottom: 99px;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 159px 0 0;
+  }
+
+  &__link {
+    @include font-normal(500);
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    text-decoration: none;
+
+    &_active {
+      text-decoration: underline;
+    }
+  }
+}

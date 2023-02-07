@@ -1,0 +1,59 @@
+@import '../../../utils/variables.scss', '../../../utils/mixins.scss';
+
+.burger {
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 7px;
+  margin-right: 24px;
+  margin-top: 26px;
+  cursor: pointer;
+  z-index: 55;
+
+  @media screen and (min-width: 900px) {
+    display: none;
+  }
+
+  &_hidden {
+    display: none;
+  }
+
+  &_opened {
+    margin: 0;
+    padding: 26px;
+  }
+
+  &__line_num_one {
+    border-bottom: 3px solid $color-black;
+  }
+  &__line_num_three {
+    border-bottom: 3px solid $color-black;
+  }
+  &__line_num_two {
+    border-bottom: 3px solid $color-black;
+  }
+
+  &__line {
+    width: 100%;
+    transition: all 0.5s ease;
+  }
+
+  &__line_num_one_active {
+    rotate: 45deg;
+    transform: translateY(14px);
+    margin-left: 25px;
+  }
+
+  &__line_num_two_active {
+    opacity: 0;
+    margin-left: 25px;
+  }
+
+  &__line_num_three_active {
+    rotate: -45deg;
+    transform: translateY(-14px);
+    margin-left: 25px;
+  }
+}

@@ -1,0 +1,48 @@
+@import '../../../utils/mixins.scss', '../../../utils/variables.scss';
+
+.grid {
+  background-color: $color-white;
+
+  &__inner {
+    @include inner;
+    display: flex;
+    flex-direction: column;
+    max-width: 1140px;
+
+    @include inner-media-main(30px);
+    @include inner-media-main(10px, 600px);
+  }
+
+  &__container {
+    border-top: 1px solid $color-light-grey;
+    padding: 80px 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 38px 20px;
+    justify-items: center;
+    margin: 0;
+
+    @media screen and (max-width: 900px) {
+      margin-top: 109px;
+    }
+
+    @media screen and (max-width: 600px) {
+      margin: 0;
+    }
+  }
+
+  &__button {
+    margin: 60px 0 159px 0;
+    width: 320px;
+    align-self: center;
+    height: 36px;
+    @include font-normal($mid);
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: $color-black;
+    background-color: transparent;
+    border: 1px solid $color-light-grey;
+    border-radius: 6px;
+  }
+}

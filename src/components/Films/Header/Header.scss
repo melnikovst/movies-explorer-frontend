@@ -1,0 +1,98 @@
+@import '../../../utils/mixins.scss', '../../../utils/variables.scss';
+
+.header {
+  background-color: $color-white;
+  height: 74px;
+
+  &_type_forms {
+    padding: 52px 0 40px 0;
+    height: 100%;
+  }
+
+  &__logo-container {
+    background-color: $color-f9;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__inner {
+    max-width: 1140px;
+    @include inner;
+    display: flex;
+    justify-content: space-between;
+    @include inner-media-main(30px);
+    @include inner-media-main(10px, 600px);
+
+    &_form {
+      padding: 0;
+
+      @media screen and (max-width: 500px) {
+        justify-content: center;
+      }
+    }
+
+    a {
+      margin: 18px 0 0 0;
+    }
+  }
+
+  &__nav-wrapper {
+    display: flex;
+    column-gap: 50px;
+
+    @media screen and (max-width: 900px) {
+      display: none;
+    }
+  }
+
+  &__img-description {
+    @include font-normal($mid);
+    margin: 0;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__account {
+    display: flex;
+    align-items: center;
+    margin-top: 21px;
+    column-gap: 13px;
+    height: fit-content;
+  }
+
+  &__nav {
+    display: flex;
+    column-gap: 20px;
+    list-style: none;
+    margin: 23px 0 0;
+    padding: 0;
+    align-items: center;
+    height: fit-content;
+
+    li {
+      height: fit-content;
+    }
+  }
+
+  &__link {
+    color: $color-black;
+    @include font-normal($mid);
+    font-size: 14px;
+    line-height: 18px;
+    text-align: right;
+    text-decoration: none;
+
+    &_hidden {
+      display: none;
+    }
+  }
+}
+
+.hide {
+  display: none;
+}

@@ -1,0 +1,122 @@
+@import '../../../utils/mixins.scss', '../../../utils/variables.scss';
+
+.student {
+  background-color: $color-white;
+  padding: 0 0 125px 0;
+
+  @media screen and (max-width: 900px) {
+    padding-bottom: 90px;
+  }
+
+  &__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 70px;
+
+    @include inner-media-main;
+    @include inner-media-main(14px, 500px);
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 50px;
+
+    @media screen and (max-width: 650px) {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+  }
+
+  &__text-wrapper {
+    display: flex;
+    max-width: 600px;
+    flex-direction: column;
+    row-gap: 26px;
+
+    @media screen and (max-width: 500px) {
+      row-gap: 20px;
+    }
+  }
+
+  &__title {
+    @include font-normal($small);
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -0.04em;
+    margin: 0;
+
+    @media screen and (max-width: 900px) {
+      font-size: 40px;
+      line-height: 40px;
+    }
+  }
+
+  &__subtitle {
+    @include font-normal($mid);
+    font-size: 18px;
+    line-height: 20px;
+    mix-blend-mode: normal;
+    margin: 0;
+
+    @media screen and (max-width: 900px) {
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+
+  &__description {
+    @include font-normal($small);
+    font-size: 14px;
+    line-height: 22px;
+    mix-blend-mode: normal;
+    margin: 0;
+
+    @media screen and (max-width: 900px) {
+      font-size: 12px;
+    }
+  }
+
+  &__image {
+    max-height: 352px;
+
+    @media screen and (max-width: 650px) {
+      height: 352px;
+      width: 100%;
+      max-width: 292px;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__project {
+    margin: 0;
+    padding: 100px 0 0 0;
+    @include font-normal($small, $color-grey);
+    font-size: 18px;
+    line-height: 20px;
+    list-style: none;
+    mix-blend-mode: normal;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+    li:first-of-type {
+      margin-top: 50px;
+    }
+
+    li:last-of-type {
+      .student__link {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &__link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    border-bottom: $color-black 1px solid;
+    padding-bottom: 19px;
+  }
+}
