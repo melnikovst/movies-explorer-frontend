@@ -1,6 +1,10 @@
 import './Form.scss';
 import useFormAndValidation from '../../../utils/hooks/useValidation';
 import cn from '../../../utils/cn';
+import { fetchFilms, selectFilms } from '../../../redux/filmsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '../../../redux/store';
+import { FormEvent } from 'react';
 
 const SearchForm = () => {
   const { isValid, errors, values, handleChange, handleBlur } =
@@ -11,10 +15,19 @@ const SearchForm = () => {
     handleBlur(e);
   };
 
+  const dispatch = useDispatch<AppDispatch>();
+
+  const fetchData = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(fetchFilms());
+  };
+
+  const { films } = useSelector(selectFilms);
+  console.log(films);
   return (
     <section className="search">
       <div className="search__inner">
-        <form className="search__form">
+        <form onSubmit={fetchData} className="search__form">
           <div className="search__image" />
           <input
             type="text"

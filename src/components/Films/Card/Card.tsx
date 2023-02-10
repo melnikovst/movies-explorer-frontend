@@ -1,22 +1,31 @@
 import './Card.scss';
-import image from './card.png';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import cn from '../../../utils/cn';
 
-const Card = () => {
+const Card: FC<{ item: TFilm }> = ({ item }) => {
   const [liked, setLiked] = useState<boolean>(false);
+  console.log(item);
 
   return (
     <li className="card">
-      <img src={image} alt="Card preview" className="card__image" />
+      <img
+        src={`https://api.nomoreparties.co${item.image.url}`}
+        alt="Card preview"
+        className="card__image"
+      />
       <div className="card__wrapper">
-        <p className="card__description">33 слова о дизайне</p>
+        <p className="card__description">{item.nameRU}</p>
         <button
           onClick={() => setLiked(!liked)}
           className={cn('card__like', { card__like_active: liked })}
         />
       </div>
-      <p className="card__duration">1ч42м</p>
+      <p className="card__duration">
+        {Math.floor(item.duration / 60) > 0
+          ? `${Math.floor(item.duration / 60)}ч`
+          : null}
+        {item.duration % 60}м
+      </p>
     </li>
   );
 };
