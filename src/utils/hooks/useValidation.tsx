@@ -11,18 +11,15 @@ type Errors<T> = {
   [key: string]: T;
 };
 
-export function useFormAndValidation() {
-  const [values, setValues] = useState<Values>({
-    email: '',
-    name: '',
-    password: '',
-  });
+export function useFormAndValidation(object: Values) {
+  const [values, setValues] = useState<Values>(object);
   const [errors, setErrors] = useState<Errors<string | undefined>>({});
   const [isValid, setIsValid] = useState<boolean>(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setValues({ ...values, [id]: value });
+    console.log(id);
   };
 
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {

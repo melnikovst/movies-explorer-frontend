@@ -4,7 +4,6 @@ import cn from '../../../utils/cn';
 
 const Card: FC<{ item: TFilm }> = ({ item }) => {
   const [liked, setLiked] = useState<boolean>(false);
-  console.log(item);
 
   return (
     <li className="card">

@@ -1,30 +1,40 @@
 import './Grid.scss';
 import Card from '../Card/Card';
-import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectFilms } from '../../../redux/filmsSlice';
+import { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  concatMore,
+  selectFilms,
+  setFilteredArray,
+  setIsChecked,
+  setIsFirst,
+  setLoad,
+  setValue,
+} from '../../../redux/filmsSlice';
 import { useResize } from '../../../utils/hooks/useResize';
 
 const Grid = () => {
   const { width } = useResize();
-  const { films } = useSelector(selectFilms);
-  const [load, setLoad] = useState<TFilm[]>([]);
+  const { films, load, value, filteredArray, isFirstRequest } =
+    useSelector(selectFilms);
+  const dispatch = useDispatch();
 
-  const handleColumns = useCallback((): number => {
-    if (width < 1290) {
+  const getCardsCount = useCallback((): number => {
+    if (width < 1290 && width > 1008) {
       return 12;
     }
-    return 16;
+    if (width < 1007 && width > 630) {
+      return 8;
+    }
+    if (width < 629) {
+      return 5;
+    } else return 16;
   }, [width]);
 
-  useEffect(() => {
-    handleColumns();
-  }, [width, handleColumns]);
+  const cardsCount = getCardsCount();
 
-  const columns = handleColumns();
-
-  const getCardsCount = (): number => {
-    if (width < 1290) {
+  const handleMore = (): number => {
+    if (width < 1290 && width >= 1008) {
       return 3;
     }
     if (width < 1008) {
@@ -32,34 +42,64 @@ const Grid = () => {
     } else return 4;
   };
 
-  const count = getCardsCount();
+  const columns = handleMore();
 
   useEffect(() => {
-    setLoad(films.slice(0, columns));
-  }, [films, columns]);
+    if (localStorage.getItem('filtered')) {
+      dispatch(setIsFirst(true));
+      dispatch(
+        setLoad(
+          JSON.parse(localStorage.getItem('filtered')!).slice(0, cardsCount)
+        )
+      );
+      dispatch(
+        setValue(JSON.parse(localStorage.getItem('requestText') as string))
+      );
+    }
+  }, []);
 
-  const loadMore = () => {
-    setLoad((state: TFilm[]) => [
-      ...state,
-      ...[...films.slice(state.length, state.length + count)],
-    ]);
-  };
+  useEffect(() => {
+    if (localStorage.getItem('films')) {
+      dispatch(setFilteredArray(value));
+      console.log(filteredArray, 'from effect');
+    }
+  }, [films]);
+
+  console.log('films', films);
+  console.log('filteredArray', filteredArray);
+
+  useEffect(() => {
+    if (filteredArray.length) {
+      dispatch(setLoad(filteredArray.slice(0, cardsCount)));
+      console.log('ya 100', filteredArray);
+    }
+  }, [filteredArray]);
 
   return (
     <section className="grid">
       <div className="grid__inner">
         <ul
           className="grid__container"
-          style={load.length === 100 ? { paddingBottom: '159px' } : {}}
+          style={
+            load.length === filteredArray.length ||
+            !isFirstRequest ||
+            load.length === 0
+              ? { paddingBottom: '159px' }
+              : {}
+          }
         >
-          {load.map((item, i) => (
-            <Card item={item} key={i} />
-          ))}
+          {!isFirstRequest && !filteredArray.length
+            ? 'введите что-то для поиска'
+            : load.map((item, i) => <Card item={item} key={i} />)}
         </ul>
         <button
-          onClick={loadMore}
+          onClick={() => dispatch(concatMore(columns))}
           style={
-            load.length === 100 ? { display: 'none' } : { display: 'block' }
+            load.length === filteredArray.length ||
+            !isFirstRequest ||
+            load.length === 0
+              ? { display: 'none' }
+              : { display: 'block' }
           }
           className="grid__button"
         >

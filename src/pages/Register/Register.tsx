@@ -5,8 +5,14 @@ import React from 'react';
 import cn from '../../utils/cn';
 
 const Register = () => {
+  const obj = {
+    name: '',
+    email: '',
+    password: '',
+  };
+
   const { values, handleChange, errors, isValid, handleBlur } =
-    useFormAndValidation();
+    useFormAndValidation(obj);
 
   const handleValidation = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChange(e);

@@ -1,12 +1,22 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
 type states = {
-  films: any;
+  films: TFilm[];
+  load: TFilm[];
+  isFirstRequest: boolean;
+  value: string;
+  filteredArray: TFilm[];
+  isChecked: boolean;
 };
 
 const initialState: states = {
-  films: [],
+  films: JSON.parse(localStorage.getItem('films') as string),
+  load: [],
+  isFirstRequest: false,
+  value: '',
+  filteredArray: JSON.parse(localStorage.getItem('filtered') as string) || [],
+  isChecked: false,
 };
 
 export const fetchFilms = createAsyncThunk<
@@ -18,24 +28,62 @@ export const fetchFilms = createAsyncThunk<
   if (!res.ok) {
     return rejectWithValue('Что-то пошло не так');
   }
-  return await res.json();
+  const data = await res.json();
+  return data;
 });
 
 const filmsSlice = createSlice({
   name: 'films',
   initialState,
   reducers: {
-    setMore(state, action) {
-      state.films.concat(action.payload);
+    setFilteredArray(state, action) {
+      state.filteredArray = state.films.filter((item) => {
+        console.log('я выполнился');
+
+        return item.nameRU.includes(action.payload);
+      });
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchFilms.fulfilled, (state, action) => {
+    setFilms(state, action) {
       state.films = action.payload;
-    });
+    },
+    setLoad(state, action) {
+      state.load = action.payload;
+    },
+    setValue(state, action) {
+      state.value = action.payload;
+    },
+    setIsFirst(state, action) {
+      state.isFirstRequest = action.payload;
+    },
+    concatMore(state, action: PayloadAction<number>) {
+      if (state.films) {
+        state.load = state.load.concat(
+          state.filteredArray.slice(
+            state.load.length,
+            state.load.length + action.payload
+          )
+        );
+      }
+    },
+    setIsChecked(state) {
+      state.isChecked = !state.isChecked;
+      state.filteredArray = state.isChecked
+        ? state.filteredArray.filter((item) => item.duration <= 40)
+        : state.films.filter((item) => {
+            return item.nameRU.includes(state.value);
+          });
+    },
   },
 });
 
-export const { setMore } = filmsSlice.actions;
 export const selectFilms = (state: RootState) => state.filmsSlice;
+export const {
+  setLoad,
+  setIsFirst,
+  concatMore,
+  setValue,
+  setFilms,
+  setFilteredArray,
+  setIsChecked,
+} = filmsSlice.actions;
 export default filmsSlice.reducer;

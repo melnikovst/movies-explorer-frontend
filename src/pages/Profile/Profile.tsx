@@ -7,9 +7,14 @@ import useFormAndValidation from '../../utils/hooks/useValidation';
 import cn from '../../utils/cn';
 
 const Profile = () => {
+  const obj = {
+    name: '',
+    email: '',
+  };
+
   const dispatch = useDispatch();
   const { values, handleChange, handleBlur, errors, isValid } =
-    useFormAndValidation();
+    useFormAndValidation(obj);
   useEffect(() => {
     dispatch(setIsAsideOpen(false));
   }, [dispatch]);
@@ -19,7 +24,6 @@ const Profile = () => {
     handleBlur(e);
   };
 
-  console.log(isValid);
   return (
     <section className="profile">
       <div>
@@ -31,11 +35,11 @@ const Profile = () => {
             </label>
             <input
               type="text"
-              id="regName"
+              id="name"
               placeholder="Имя"
               className="form__name form__input"
               onChange={handleValidation}
-              defaultValue={values.name}
+              value={values.name}
               minLength={5}
             />
           </fieldset>
