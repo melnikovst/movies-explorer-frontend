@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   concatMore,
   selectFilms,
+  setFiltered,
   setFilteredArray,
-  setIsChecked,
   setIsFirst,
   setLoad,
   setValue,
@@ -45,35 +45,29 @@ const Grid = () => {
   const columns = handleMore();
 
   useEffect(() => {
+    if (localStorage.getItem('films') && !localStorage.getItem('filtered')) {
+      dispatch(setIsFirst(true));
+      dispatch(setFilteredArray(value));
+    }
     if (localStorage.getItem('filtered')) {
       dispatch(setIsFirst(true));
       dispatch(
-        setLoad(
-          JSON.parse(localStorage.getItem('filtered')!).slice(0, cardsCount)
-        )
+        setFiltered(JSON.parse(localStorage.getItem('filtered') as string))
       );
       dispatch(
         setValue(JSON.parse(localStorage.getItem('requestText') as string))
       );
     }
-  }, []);
-
-  useEffect(() => {
-    if (localStorage.getItem('films')) {
-      dispatch(setFilteredArray(value));
-      console.log(filteredArray, 'from effect');
-    }
   }, [films]);
-
-  console.log('films', films);
-  console.log('filteredArray', filteredArray);
 
   useEffect(() => {
     if (filteredArray.length) {
       dispatch(setLoad(filteredArray.slice(0, cardsCount)));
-      console.log('ya 100', filteredArray);
+      localStorage.setItem('filtered', JSON.stringify(filteredArray));
     }
   }, [filteredArray]);
+
+  console.log(filteredArray);
 
   return (
     <section className="grid">
@@ -83,13 +77,14 @@ const Grid = () => {
           style={
             load.length === filteredArray.length ||
             !isFirstRequest ||
-            load.length === 0
+            load.length === 0 ||
+            !filteredArray.length
               ? { paddingBottom: '159px' }
               : {}
           }
         >
-          {!isFirstRequest && !filteredArray.length
-            ? 'введите что-то для поиска'
+          {!filteredArray.length
+            ? 'Введите запрос для поиска'
             : load.map((item, i) => <Card item={item} key={i} />)}
         </ul>
         <button
@@ -97,7 +92,8 @@ const Grid = () => {
           style={
             load.length === filteredArray.length ||
             !isFirstRequest ||
-            load.length === 0
+            load.length === 0 ||
+            !filteredArray.length
               ? { display: 'none' }
               : { display: 'block' }
           }

@@ -3,6 +3,10 @@ import './Register.scss';
 import useFormAndValidation from '../../utils/hooks/useValidation';
 import React from 'react';
 import cn from '../../utils/cn';
+import register /* { login } */ from '../../utils/register';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/formSlice';
+import { AppDispatch } from '../../redux/store';
 
 const Register = () => {
   const obj = {
@@ -10,6 +14,8 @@ const Register = () => {
     email: '',
     password: '',
   };
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const { values, handleChange, errors, isValid, handleBlur } =
     useFormAndValidation(obj);
@@ -19,50 +25,56 @@ const Register = () => {
     handleBlur(e);
   };
 
+  const onRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+    register(values.name, values.email, values.password);
+    dispatch(login(values));
+  };
+
   return (
     <section className="register">
       <h2 className="register__title">Добро пожаловать!</h2>
-      <form className="form">
+      <form onSubmit={onRegister} className="form">
         <fieldset className="fieldset">
-          <label htmlFor="regName" className="form__label">
+          <label htmlFor="name" className="form__label">
             Имя
           </label>
           <input
             type="text"
-            id="regName"
+            id="name"
             className="form__input"
             placeholder="Имя"
             onChange={handleValidation}
-            defaultValue={values.name}
+            value={values.name}
             minLength={5}
           />
           <span className={cn('form__error', { form__error_active: !isValid })}>
-            {errors.regName}
+            {errors.name}
           </span>
-          <label htmlFor="regEmail" className="form__label">
+          <label htmlFor="email" className="form__label">
             Email
           </label>
           <input
             type="email"
-            id="regEmail"
+            id="email"
             className="form__input"
             placeholder="Email"
             onChange={handleValidation}
-            defaultValue={values.email}
+            value={values.email}
           />
           <span className={cn('form__error', { form__error_active: !isValid })}>
-            {errors.regEmail}
+            {errors.email}
           </span>
-          <label htmlFor="regPassword" className="form__label">
+          <label htmlFor="password" className="form__label">
             Пароль
           </label>
           <input
             type="password"
-            id="regPassword"
+            id="password"
             className="form__input form__input_type_auth"
             placeholder="Пароль"
             onChange={handleValidation}
-            defaultValue={values.password}
+            value={values.password}
             minLength={10}
           />
           <span className={cn('form__error', { form__error_active: !isValid })}>

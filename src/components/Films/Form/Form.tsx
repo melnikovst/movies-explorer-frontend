@@ -12,10 +12,6 @@ import {
 import { AppDispatch } from '../../../redux/store';
 
 const SearchForm = () => {
-  const obj = {
-    email: '',
-  };
-
   const dispatch = useDispatch<AppDispatch>();
   const dispatcher = useDispatch();
   const { value, isChecked } = useSelector(selectFilms);
@@ -26,7 +22,6 @@ const SearchForm = () => {
       try {
         dispatcher(setIsFirst(true));
         const { payload } = await dispatch(fetchFilms());
-        console.log(payload);
         localStorage.setItem('films', JSON.stringify(payload));
         localStorage.setItem('requestText', JSON.stringify(value));
         return payload;

@@ -37,11 +37,12 @@ const filmsSlice = createSlice({
   initialState,
   reducers: {
     setFilteredArray(state, action) {
-      state.filteredArray = state.films.filter((item) => {
-        console.log('я выполнился');
-
-        return item.nameRU.includes(action.payload);
-      });
+      state.filteredArray = state.films.filter((item) =>
+        item.nameRU.includes(action.payload)
+      );
+    },
+    setFiltered(state, action) {
+      state.filteredArray = action.payload;
     },
     setFilms(state, action) {
       state.films = action.payload;
@@ -85,5 +86,6 @@ export const {
   setFilms,
   setFilteredArray,
   setIsChecked,
+  setFiltered,
 } = filmsSlice.actions;
 export default filmsSlice.reducer;
