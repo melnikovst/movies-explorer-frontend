@@ -101,6 +101,12 @@
       text-align: center;
       margin-top: 69px;
       cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:disabled {
+        opacity: 0.1;
+        cursor: auto;
+      }
 
       @media screen and (max-width: 500px) {
         margin-top: 157px;

@@ -67,8 +67,6 @@ const Grid = () => {
     }
   }, [filteredArray]);
 
-  console.log(filteredArray);
-
   return (
     <section className="grid">
       <div className="grid__inner">

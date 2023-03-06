@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Register.scss';
 import useFormAndValidation from '../../utils/hooks/useValidation';
 import React from 'react';
 import cn from '../../utils/cn';
-import register /* { login } */ from '../../utils/register';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/formSlice';
+import { login, setIsLogged, register } from '../../redux/formSlice';
 import { AppDispatch } from '../../redux/store';
 
 const Register = () => {
@@ -14,7 +13,7 @@ const Register = () => {
     email: '',
     password: '',
   };
-
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
   const { values, handleChange, errors, isValid, handleBlur } =
@@ -27,14 +26,28 @@ const Register = () => {
 
   const onRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    register(values.name, values.email, values.password);
-    dispatch(login(values));
+    console.log('выполнилося');
+    try {
+      dispatch(
+        register({
+          name: values.name,
+          email: values.email,
+          password: values.password,
+        })
+      );
+      dispatch(login({ email: values.email, password: values.password }));
+      dispatch(setIsLogged(true));
+      navigate('/films');
+    } catch (error) {
+      console.log(error);
+      navigate('/');
+    }
   };
 
   return (
     <section className="register">
       <h2 className="register__title">Добро пожаловать!</h2>
-      <form onSubmit={onRegister} className="form">
+      <form onSubmit={onRegister} className="form" noValidate>
         <fieldset className="fieldset">
           <label htmlFor="name" className="form__label">
             Имя
@@ -75,13 +88,15 @@ const Register = () => {
             placeholder="Пароль"
             onChange={handleValidation}
             value={values.password}
-            minLength={10}
+            minLength={5}
           />
           <span className={cn('form__error', { form__error_active: !isValid })}>
             Что-то пошло не так...
           </span>
         </fieldset>
-        <button className="form__button">Зарегестрироваться</button>
+        <button disabled={!isValid} className="form__button">
+          Зарегестрироваться
+        </button>
       </form>
       <p className="register__caption">
         Уже зарегестрированы?
