@@ -57,7 +57,7 @@ const Register = () => {
             id="name"
             className="form__input"
             placeholder="Имя"
-            onChange={handleValidation}
+            onChange={(e) => handleChange(e)}
             value={values.name}
             minLength={5}
           />

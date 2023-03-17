@@ -7,6 +7,7 @@ import useFormAndValidation from '../../utils/hooks/useValidation';
 import cn from '../../utils/cn';
 import { AppDispatch } from '../../redux/store';
 import { selectForm, signout } from '../../redux/formSlice';
+import { setIsFirst } from '../../redux/filmsSlice';
 
 const Profile = () => {
   const { pname, pemail } = useSelector(selectForm);
@@ -23,7 +24,8 @@ const Profile = () => {
     dispatch(setIsAsideOpen(false));
   }, [dispatch]);
 
-  const handleExit = () => {
+  const handleExit = async () => {
+    dispatch(setIsFirst(true));
     dispatcher(signout());
     console.log('успешно вышли');
   };
@@ -76,9 +78,9 @@ const Profile = () => {
           </Link>
         </form>
       </div>
-      <Link to="/" className="profile__btn" onClick={handleExit}>
+      <button className="profile__btn" onClick={handleExit}>
         Выйти из аккаунта
-      </Link>
+      </button>
     </section>
   );
 };

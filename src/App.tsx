@@ -16,6 +16,7 @@ import Grid from './components/Films/Grid/Grid';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import { useEffect } from 'react';
 import { getProfile, selectForm } from './redux/formSlice';
+import { useWhyDidYouUpdate } from 'ahooks';
 
 function App() {
   const { pathname } = useLocation();
@@ -23,18 +24,19 @@ function App() {
   const dispatch = useDispatch<AppDispatch>();
   const { profileData, isLogged } = useSelector(selectForm);
   const navigate = useNavigate();
-
   console.log(isLogged);
-
+  useWhyDidYouUpdate('App', {isAsideOpen})
   useEffect(() => {
-    if (isLogged) {
+    try {
       dispatch(getProfile());
-      if (profileData.email) {
-        navigate('/films');
-      }
+      console.log(profileData);
+      navigate('/films');
+    } catch (error) {
+      navigate('/');
     }
   }, [isLogged]);
-
+  console.log('render');
+  
   const isForm = pathname === '/sign-in' || pathname === '/sign-up';
 
   return (

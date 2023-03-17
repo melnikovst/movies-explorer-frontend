@@ -1,6 +1,6 @@
 import './Grid.scss';
 import Card from '../Card/Card';
-import { useCallback, useEffect } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   concatMore,
@@ -12,8 +12,9 @@ import {
   setValue,
 } from '../../../redux/filmsSlice';
 import { useResize } from '../../../utils/hooks/useResize';
+import BigLoader from '../../Loaders/BigLoader';
 
-const Grid = () => {
+const Grid = memo(() => {
   const { width } = useResize();
   const { films, load, value, filteredArray, isFirstRequest } =
     useSelector(selectFilms);
@@ -67,6 +68,7 @@ const Grid = () => {
     }
   }, [filteredArray]);
 
+
   return (
     <section className="grid">
       <div className="grid__inner">
@@ -102,6 +104,6 @@ const Grid = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Grid;

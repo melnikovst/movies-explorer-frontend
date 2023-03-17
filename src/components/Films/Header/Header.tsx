@@ -5,8 +5,9 @@ import AccKey from './AccKey.svg';
 import Burger from '../Burger/Burger';
 import BurgerTooltip from '../Burger/BurgerTooltip';
 import cn from '../../../utils/cn';
+import { memo } from 'react';
 
-const Header = () => {
+const Header = memo(() => {
   const { pathname } = useLocation();
   const handleHeader = (): string => {
     if (pathname === '/sign-in') return 'header_type_forms';
@@ -57,6 +58,6 @@ const Header = () => {
       </div>
     </header>
   );
-};
+});
 
 export default Header;

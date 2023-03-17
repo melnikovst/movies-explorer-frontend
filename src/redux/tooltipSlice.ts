@@ -17,11 +17,8 @@ const tooltipSlice = createSlice({
     setIsAsideOpen(state, action: PayloadAction<boolean>) {
       state.isAsideOpen = action.payload;
     },
-    setIsTechOpen(state, action: PayloadAction<number | null>) {
-      state.isTechOpen = action.payload;
-    },
   },
 });
 
-export const { setIsAsideOpen, setIsTechOpen } = tooltipSlice.actions;
+export const { setIsAsideOpen, } = tooltipSlice.actions;
 export default tooltipSlice.reducer;

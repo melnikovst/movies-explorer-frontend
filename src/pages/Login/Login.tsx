@@ -48,7 +48,7 @@ const Login = () => {
             id="email"
             className="form__input"
             placeholder="Email"
-            onChange={handleValidation}
+            onChange={(e) => handleChange(e)}
             defaultValue={values.email}
           />
           <span className={cn('form__error', { form__error_active: !isValid })}>

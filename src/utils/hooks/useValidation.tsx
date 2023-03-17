@@ -19,7 +19,8 @@ export function useFormAndValidation(object: Values) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setValues({ ...values, [id]: value });
-    console.log(id);
+    setErrors({ ...errors, [id]: e.target.validationMessage });
+    setIsValid((e.target as HTMLElement).closest('form')!.checkValidity());
   };
 
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import filmsSlice from './filmsSlice';
 import { RootState } from './store';
 
 interface IGet {
@@ -11,6 +10,11 @@ interface IResponse extends IGet {
   password?: string;
 }
 
+type TReg = {
+  email: string;
+  password?: string;
+};
+
 type TStates = {
   isLogged: boolean;
   profileData: Partial<IGet>;
@@ -18,10 +22,10 @@ type TStates = {
   pemail: string;
 };
 
-export const login = createAsyncThunk<any, any>(
+export const login = createAsyncThunk<any, TReg>(
   'login',
   async ({ email, password }) => {
-    const res = await fetch('https://api.mvies.nomoredomains.work/signin', {
+    const res = await fetch('http://localhost:3001/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -37,7 +41,7 @@ export const login = createAsyncThunk<any, any>(
 );
 
 export const signout = createAsyncThunk<any>('/signout', async () => {
-  const res = await fetch('https://api.mvies.nomoredomains.work/signout', {
+  const res = await fetch('http://localhost:3001/signout', {
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
   });
@@ -51,9 +55,9 @@ export const signout = createAsyncThunk<any>('/signout', async () => {
 
 export const register = createAsyncThunk<IGet, IResponse>(
   'register',
-  async ({ name, email, password }) => {
+  async ({ name, email, password }: IResponse) => {
     try {
-      const res = await fetch('https://api.mvies.nomoredomains.work/signup', {
+      const res = await fetch('http://localhost:3001/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -72,7 +76,7 @@ export const register = createAsyncThunk<IGet, IResponse>(
 );
 
 export const getProfile = createAsyncThunk<any>('/me', async () => {
-  const res = await fetch('https://api.mvies.nomoredomains.work/users/me', {
+  const res = await fetch('http://localhost:3001/users/me', {
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
   });
@@ -103,13 +107,11 @@ const formSlice = createSlice({
       state.isLogged = true;
     });
     builder.addCase(login.rejected, (state) => {
+      console.log('ошибка')
       state.isLogged = false;
     });
     builder.addCase(register.rejected, (state) => {
       state.isLogged = false;
-    });
-    builder.addCase(register.fulfilled, (state) => {
-      state.isLogged = true;
     });
     builder.addCase(getProfile.fulfilled, (state, action) => {
       state.profileData = action.payload;
@@ -119,6 +121,8 @@ const formSlice = createSlice({
     });
     builder.addCase(signout.fulfilled, (state) => {
       state.profileData = {};
+      state.pname = '';
+      state.pemail = '';
       state.isLogged = false;
     });
   },
