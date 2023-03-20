@@ -24,8 +24,8 @@ function App() {
   const dispatch = useDispatch<AppDispatch>();
   const { profileData, isLogged } = useSelector(selectForm);
   const navigate = useNavigate();
-  console.log(isLogged);
-  useWhyDidYouUpdate('App', {isAsideOpen})
+
+  useWhyDidYouUpdate('App', { isAsideOpen });
   useEffect(() => {
     try {
       dispatch(getProfile());
@@ -35,8 +35,7 @@ function App() {
       navigate('/');
     }
   }, [isLogged]);
-  console.log('render');
-  
+
   const isForm = pathname === '/sign-in' || pathname === '/sign-up';
 
   return (

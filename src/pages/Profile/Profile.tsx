@@ -38,7 +38,7 @@ const Profile = () => {
   return (
     <section className="profile">
       <div>
-        <h1 className="profile__title">Привет, Виталий!</h1>
+        <h1 className="profile__title">Привет, {values.name}!</h1>
         <form className="form">
           <fieldset className="fieldset">
             <label className="form__label" htmlFor="name">

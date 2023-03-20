@@ -1,16 +1,22 @@
 import './Card.scss';
 import { FC, useState } from 'react';
 import cn from '../../../utils/cn';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../../redux/store';
 import { useLocation } from 'react-router-dom';
-import { postSaved, deleteSaved } from '../../../redux/savedFilmsSlice';
+import {
+  postSaved,
+  deleteSaved,
+  selectSaved,
+} from '../../../redux/savedFilmsSlice';
 
 const Card: FC<{ item: any }> = ({ item }) => {
-  const [liked, setLiked] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const { pathname } = useLocation();
+  const { savedFilms } = useSelector(selectSaved);
 
+  const matched = savedFilms.some((i) => i.nameRU === item.nameRU);
+  console.log(savedFilms);
   const saveCard = () => {
     const card = {
       movieId: item.id,
@@ -25,18 +31,14 @@ const Card: FC<{ item: any }> = ({ item }) => {
       thumbnail: `https://api.nomoreparties.co/beatfilm-movies${item.image.formats.thumbnail.url}`,
       year: item.year,
     };
-    setLiked(!liked);
     dispatch(postSaved(card));
+    console.log(card);
   };
 
-  const handledeleteCard = (e: { stopPropagation: () => void }) => {
-    e.stopPropagation();
-    console.log(item);
-    dispatch(deleteSaved(item));
-  };
+  const isSaved = pathname === '/films/saved';
 
   return (
-    <li className="card" onClick={handledeleteCard}>
+    <li className="card">
       <img
         src={
           pathname === '/films/saved'
@@ -49,8 +51,13 @@ const Card: FC<{ item: any }> = ({ item }) => {
       <div className="card__wrapper">
         <p className="card__description">{item.nameRU}</p>
         <button
-          onClick={saveCard}
-          className={cn('card__like', { card__like_active: liked })}
+          onClick={isSaved ? () => dispatch(deleteSaved(item)) : saveCard}
+          className={cn('card__btn', {
+            card__like_active: matched,
+            card__delete: isSaved,
+            card__like: !isSaved,
+          })}
+          disabled={pathname === '/films' ? matched : false}
         />
       </div>
       <p className="card__duration">

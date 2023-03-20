@@ -12,13 +12,18 @@ import {
   setValue,
 } from '../../../redux/filmsSlice';
 import { useResize } from '../../../utils/hooks/useResize';
-import BigLoader from '../../Loaders/BigLoader';
+import { getSaved } from '../../../redux/savedFilmsSlice';
+import { AppDispatch } from '../../../redux/store';
 
 const Grid = memo(() => {
   const { width } = useResize();
   const { films, load, value, filteredArray, isFirstRequest } =
     useSelector(selectFilms);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(getSaved());
+  }, []);
 
   const getCardsCount = useCallback((): number => {
     if (width < 1290 && width > 1008) {
@@ -67,7 +72,6 @@ const Grid = memo(() => {
       localStorage.setItem('filtered', JSON.stringify(filteredArray));
     }
   }, [filteredArray]);
-
 
   return (
     <section className="grid">

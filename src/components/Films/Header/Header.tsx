@@ -40,7 +40,12 @@ const Header = memo(() => {
                 </Link>
               </li>
               <li>
-                <Link to={'/films/saved'} className="header__link">
+                <Link
+                  to={'/films/saved'}
+                  className={cn('header__link', {
+                    header__link_hidden: pathname === '/films/saved',
+                  })}
+                >
                   Сохранённые фильмы
                 </Link>
               </li>
