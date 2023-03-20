@@ -1,10 +1,11 @@
 import './Saved.scss';
 import Card from '../../components/Films/Card/Card';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSaved, selectSaved } from '../../redux/savedFilmsSlice';
+import { selectSaved } from '../../redux/savedFilmsSlice';
 import { useEffect } from 'react';
 import { AppDispatch } from '../../redux/store';
 import { selectFilms } from '../../redux/filmsSlice';
+import { getSaved } from '../../redux/thunks/savedFilmsThunks';
 
 const Saved = () => {
   const { savedFilms, isChanged } = useSelector(selectSaved);

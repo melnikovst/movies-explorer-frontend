@@ -4,8 +4,10 @@ import useFormAndValidation from '../../utils/hooks/useValidation';
 import React from 'react';
 import cn from '../../utils/cn';
 import { useDispatch } from 'react-redux';
-import { login, setIsLogged, register } from '../../redux/formSlice';
+import { setIsLogged } from '../../redux/formSlice';
+
 import { AppDispatch } from '../../redux/store';
+import { login, register } from '../../redux/thunks/formThunks';
 
 const Register = () => {
   const obj = {

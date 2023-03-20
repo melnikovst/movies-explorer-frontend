@@ -6,8 +6,9 @@ import { setIsAsideOpen } from '../../redux/tooltipSlice';
 import useFormAndValidation from '../../utils/hooks/useValidation';
 import cn from '../../utils/cn';
 import { AppDispatch } from '../../redux/store';
-import { selectForm, signout } from '../../redux/formSlice';
+import { selectForm } from '../../redux/formSlice';
 import { setIsFirst } from '../../redux/filmsSlice';
+import { signout } from '../../redux/thunks/formThunks';
 
 const Profile = () => {
   const { pname, pemail } = useSelector(selectForm);
@@ -15,6 +16,8 @@ const Profile = () => {
     name: pname,
     email: pemail,
   };
+
+  console.log(pname);
 
   const dispatch = useDispatch();
   const dispatcher = useDispatch<AppDispatch>();
@@ -30,10 +33,33 @@ const Profile = () => {
     console.log('успешно вышли');
   };
 
+  const onUpdate = async (name: string, email: string) => {
+    const res = await fetch('http://localhost:3001/users/me', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({ name, email }),
+    });
+    console.log(res);
+    if (res.ok) {
+      const data = res.json();
+      return data;
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  };
+
+  const handleUpdate = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    onUpdate(values.name, values.email);
+  };
+
   const handleValidation = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChange(e);
     handleBlur(e);
   };
+  console.log(isValid);
 
   return (
     <section className="profile">
@@ -55,7 +81,7 @@ const Profile = () => {
             />
           </fieldset>
           <span className={cn('form__error', { form__error_active: !isValid })}>
-            {errors.regName}
+            {errors.name}
           </span>
           <fieldset className="fieldset">
             <label className="form__label" htmlFor="name">
@@ -71,11 +97,11 @@ const Profile = () => {
             />
           </fieldset>
           <span className={cn('form__error', { form__error_active: !isValid })}>
-            {errors.regEmail}
+            {errors.email}
           </span>
-          <Link to="/sign-up" className="form__btn">
+          <button className="form__btn" onClick={handleUpdate}>
             Редактировать
-          </Link>
+          </button>
         </form>
       </div>
       <button className="profile__btn" onClick={handleExit}>

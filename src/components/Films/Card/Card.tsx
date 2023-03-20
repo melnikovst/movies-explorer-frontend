@@ -1,14 +1,11 @@
 import './Card.scss';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import cn from '../../../utils/cn';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../../redux/store';
 import { useLocation } from 'react-router-dom';
-import {
-  postSaved,
-  deleteSaved,
-  selectSaved,
-} from '../../../redux/savedFilmsSlice';
+import { selectSaved } from '../../../redux/savedFilmsSlice';
+import { deleteSaved, postSaved } from '../../../redux/thunks/savedFilmsThunks';
 
 const Card: FC<{ item: any }> = ({ item }) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,7 +13,6 @@ const Card: FC<{ item: any }> = ({ item }) => {
   const { savedFilms } = useSelector(selectSaved);
 
   const matched = savedFilms.some((i) => i.nameRU === item.nameRU);
-  console.log(savedFilms);
   const saveCard = () => {
     const card = {
       movieId: item.id,
@@ -32,7 +28,6 @@ const Card: FC<{ item: any }> = ({ item }) => {
       year: item.year,
     };
     dispatch(postSaved(card));
-    console.log(card);
   };
 
   const isSaved = pathname === '/films/saved';

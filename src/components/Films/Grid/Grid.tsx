@@ -12,8 +12,8 @@ import {
   setValue,
 } from '../../../redux/filmsSlice';
 import { useResize } from '../../../utils/hooks/useResize';
-import { getSaved } from '../../../redux/savedFilmsSlice';
 import { AppDispatch } from '../../../redux/store';
+import { getSaved } from '../../../redux/thunks/savedFilmsThunks';
 
 const Grid = memo(() => {
   const { width } = useResize();

@@ -5,7 +5,8 @@ import React from 'react';
 import cn from '../../utils/cn';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
-import { login, setIsLogged } from '../../redux/formSlice';
+import { setIsLogged } from '../../redux/formSlice';
+import { login } from '../../redux/thunks/formThunks';
 
 const Login = () => {
   const obj = {

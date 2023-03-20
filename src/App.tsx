@@ -15,8 +15,9 @@ import Saved from './pages/Saved/Saved';
 import Grid from './components/Films/Grid/Grid';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import { useEffect } from 'react';
-import { getProfile, selectForm } from './redux/formSlice';
+import { selectForm } from './redux/formSlice';
 import { useWhyDidYouUpdate } from 'ahooks';
+import { getProfile } from './redux/thunks/formThunks';
 
 function App() {
   const { pathname } = useLocation();
