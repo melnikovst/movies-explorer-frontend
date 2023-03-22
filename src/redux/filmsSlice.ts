@@ -16,7 +16,7 @@ const initialState: states = {
   isFirstRequest: false,
   value: '',
   filteredArray: JSON.parse(localStorage.getItem('filtered') as string) || [],
-  isChecked: false,
+  isChecked: JSON.parse(localStorage.getItem('boolean') as string) || null,
 };
 
 export const fetchFilms = createAsyncThunk<

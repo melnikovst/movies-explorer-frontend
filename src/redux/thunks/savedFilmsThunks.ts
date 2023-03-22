@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getSaved = createAsyncThunk<any>('/movies', async () => {
   const res = await fetch('http://localhost:3001/movies', {

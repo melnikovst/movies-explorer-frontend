@@ -7,6 +7,7 @@ import {
   selectFilms,
   setFiltered,
   setFilteredArray,
+  setIsChecked,
   setIsFirst,
   setLoad,
   setValue,
@@ -66,10 +67,13 @@ const Grid = memo(() => {
     }
   }, [films]);
 
+  console.log(JSON.parse(localStorage.getItem('boolean') as string));
+
   useEffect(() => {
     if (filteredArray.length) {
       dispatch(setLoad(filteredArray.slice(0, cardsCount)));
       localStorage.setItem('filtered', JSON.stringify(filteredArray));
+      console.log('effect from app');
     }
   }, [filteredArray]);
 

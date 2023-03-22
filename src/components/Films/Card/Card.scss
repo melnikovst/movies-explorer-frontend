@@ -21,13 +21,8 @@
     background-image: url('./like.svg');
     transition: transform 0.3s ease;
 
-    &:hover {
-      transform: scale(1.1);
-    }
-
     &_active {
       background-image: url('./likeActive.svg');
-      cursor: default !important;
     }
   }
 
@@ -40,10 +35,19 @@
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
+    &:hover {
+      transform: scale(1.2);
+    }
+
+    &:disabled {
+      cursor: default;
+    }
   }
 
   &__delete {
     background-image: url('./delete.svg');
+    cursor: pointer;
+    transition: all 0.2s ease;
   }
 
   &__description {

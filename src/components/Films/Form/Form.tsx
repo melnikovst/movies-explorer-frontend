@@ -10,11 +10,13 @@ import {
   setIsChecked,
 } from '../../../redux/filmsSlice';
 import { AppDispatch } from '../../../redux/store';
+import { useLocation } from 'react-router-dom';
 
 const SearchForm = () => {
   const dispatch = useDispatch<AppDispatch>();
   const dispatcher = useDispatch();
-  const { value, isChecked } = useSelector(selectFilms);
+  const { value, isChecked, isFirstRequest } = useSelector(selectFilms);
+  const { pathname } = useLocation();
 
   const getData = async () => {
     const data = JSON.parse(localStorage.getItem('films') as string);
@@ -37,11 +39,20 @@ const SearchForm = () => {
     }
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const data = await getData();
     dispatcher(setFilms(data));
   };
+  console.log(isFirstRequest);
+
+  const handleCheckbox = () => {
+    if (!isFirstRequest) return;
+    dispatcher(setIsChecked());
+    localStorage.setItem('checkbox', JSON.stringify(isChecked));
+  };
+
+  console.log(pathname);
 
   return (
     <section className="search">
@@ -64,29 +75,24 @@ const SearchForm = () => {
           >
             {/* {errors.regName} */}
           </span>
-          <button type="submit" className="search__btn" />
+          <button
+            type="submit"
+            className="search__btn"
+            disabled={pathname === '/films/saved'}
+          />
           <div className="search__wrapper">
             <label className="toggler-wrapper">
               <input
                 type="checkbox"
-                onChange={() => {
-                  dispatcher(setIsChecked());
-                }}
+                onChange={handleCheckbox}
                 checked={isChecked}
+                disabled={!isFirstRequest}
               />
               <div className="toggler-slider">
                 <div className="toggler-knob"></div>
               </div>
             </label>
-            <p
-              onClick={() => {
-                localStorage.clear();
-                dispatcher(setIsFirst(false));
-              }}
-              className="search__text"
-            >
-              Короткометражки
-            </p>
+            <p className="search__text">Короткометражки</p>
           </div>
         </form>
       </div>

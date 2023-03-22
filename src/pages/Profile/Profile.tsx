@@ -30,6 +30,7 @@ const Profile = () => {
   const handleExit = async () => {
     dispatch(setIsFirst(true));
     dispatcher(signout());
+    localStorage.clear();
     console.log('успешно вышли');
   };
 

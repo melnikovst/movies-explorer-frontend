@@ -23,14 +23,13 @@ function App() {
   const { pathname } = useLocation();
   const { isAsideOpen } = useSelector((state: RootState) => state.tooltipSlice);
   const dispatch = useDispatch<AppDispatch>();
-  const { profileData, isLogged } = useSelector(selectForm);
+  const { isLogged } = useSelector(selectForm);
   const navigate = useNavigate();
 
   useWhyDidYouUpdate('App', { isAsideOpen });
   useEffect(() => {
     try {
       dispatch(getProfile());
-      console.log(profileData);
       navigate('/films');
     } catch (error) {
       navigate('/');
