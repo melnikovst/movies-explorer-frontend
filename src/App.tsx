@@ -26,7 +26,6 @@ function App() {
   const { isLogged } = useSelector(selectForm);
   const navigate = useNavigate();
 
-  useWhyDidYouUpdate('App', { isAsideOpen });
   useEffect(() => {
     try {
       dispatch(getProfile());

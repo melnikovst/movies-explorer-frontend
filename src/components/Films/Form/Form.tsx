@@ -14,7 +14,6 @@ import { useLocation } from 'react-router-dom';
 
 const SearchForm = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const dispatcher = useDispatch();
   const { value, isChecked, isFirstRequest } = useSelector(selectFilms);
   const { pathname } = useLocation();
 
@@ -22,7 +21,7 @@ const SearchForm = () => {
     const data = JSON.parse(localStorage.getItem('films') as string);
     if (!data) {
       try {
-        dispatcher(setIsFirst(true));
+        dispatch(setIsFirst(true));
         const { payload } = await dispatch(fetchFilms());
         localStorage.setItem('films', JSON.stringify(payload));
         localStorage.setItem('requestText', JSON.stringify(value));
@@ -42,14 +41,13 @@ const SearchForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const data = await getData();
-    dispatcher(setFilms(data));
+    dispatch(setFilms(data));
   };
-  console.log(isFirstRequest);
 
   const handleCheckbox = () => {
     if (!isFirstRequest) return;
-    dispatcher(setIsChecked());
-    localStorage.setItem('checkbox', JSON.stringify(isChecked));
+    dispatch(setIsChecked(!isChecked));
+    localStorage.setItem('checkbox', JSON.stringify(!isChecked));
   };
 
   console.log(pathname);

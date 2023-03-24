@@ -16,7 +16,7 @@ const initialState: states = {
   isFirstRequest: false,
   value: '',
   filteredArray: JSON.parse(localStorage.getItem('filtered') as string) || [],
-  isChecked: JSON.parse(localStorage.getItem('boolean') as string) || null,
+  isChecked: JSON.parse(localStorage.getItem('checkbox') as string),
 };
 
 export const fetchFilms = createAsyncThunk<
@@ -66,8 +66,8 @@ const filmsSlice = createSlice({
         );
       }
     },
-    setIsChecked(state) {
-      state.isChecked = !state.isChecked;
+    setIsChecked(state, action) {
+      state.isChecked = action.payload;
       state.filteredArray = state.isChecked
         ? state.filteredArray.filter((item) => item.duration <= 40)
         : state.films.filter((item) => {
