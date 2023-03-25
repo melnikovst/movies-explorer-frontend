@@ -12,11 +12,13 @@ import {
 import { AppDispatch } from '../../../redux/store';
 import { useLocation } from 'react-router-dom';
 import { filterSaved } from '../../../redux/thunks/savedFilmsThunks';
+import { useState } from 'react';
 
 const SearchForm = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { value, isChecked, isFirstRequest } = useSelector(selectFilms);
   const { pathname } = useLocation();
+  const [flag, setFlag] = useState<boolean>(false);
 
   const getData = async () => {
     const data = JSON.parse(localStorage.getItem('films') as string);
@@ -39,10 +41,13 @@ const SearchForm = () => {
     }
   };
 
-  console.log(isChecked);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!value.length) {
+      setFlag(true);
+      setTimeout(() => setFlag(false), 2000);
+      return;
+    }
     const data = await getData();
     dispatch(setFilms(data));
   };
@@ -53,12 +58,10 @@ const SearchForm = () => {
     localStorage.setItem('checkbox', JSON.stringify(!isChecked));
   };
 
-  console.log(isChecked);
-
   return (
     <section className="search">
       <div className="search__inner">
-        <form onSubmit={handleSubmit} className="search__form">
+        <form onSubmit={handleSubmit} className="search__form" noValidate>
           <div className="search__image" />
           <input
             type="text"
@@ -71,10 +74,10 @@ const SearchForm = () => {
           />
           <span
             className={cn('search__error', {
-              search__error_active: '' /* !isValid */,
+              search__error_active: flag,
             })}
           >
-            {/* {errors.name} */}
+            Введите запрос для поиска
           </span>
           <button
             type="submit"

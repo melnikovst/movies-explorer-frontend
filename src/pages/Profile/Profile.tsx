@@ -35,7 +35,7 @@ const Profile = () => {
     console.log('успешно вышли');
   };
 
-  const onUpdate = async (name: string, email: string) => {
+  const onUpdate = async (name: string, email?: string) => {
     const res = await fetch('http://localhost:3001/users/me', {
       method: 'PATCH',
       headers: {

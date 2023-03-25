@@ -5,13 +5,13 @@ interface IResponse extends IGet {
 }
 
 type TReg = {
-  email: string;
+  email?: string;
   password?: string;
 };
 
 export interface IGet {
   name: string;
-  email: string;
+  email?: string;
 }
 
 export const login = createAsyncThunk<any, TReg>(
