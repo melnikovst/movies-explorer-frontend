@@ -1,17 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
-import { getSaved, postSaved, deleteSaved } from './thunks/savedFilmsThunks';
+import {
+  getSaved,
+  postSaved,
+  deleteSaved,
+  filterSaved,
+} from './thunks/savedFilmsThunks';
 
 type states = {
   savedFilms: TFilm[];
   savedFilm: any;
   isChanged: boolean;
+  filteredFilms: TFilm[];
 };
 
 const initialState: states = {
   savedFilms: [],
   savedFilm: {},
   isChanged: false,
+  filteredFilms: [],
 };
 
 const savedFilmsSlice = createSlice({
@@ -29,6 +36,9 @@ const savedFilmsSlice = createSlice({
     builder.addCase(deleteSaved.fulfilled, (state, action) => {
       state.isChanged = !state.isChanged;
       state.savedFilms.filter((c) => c.nameRU === action.payload.nameRU);
+    });
+    builder.addCase(filterSaved, (state) => {
+      state.filteredFilms = state.savedFilms.filter((i) => i.duration <= 40);
     });
   },
 });

@@ -8,15 +8,13 @@ import { selectFilms } from '../../redux/filmsSlice';
 import { getSaved } from '../../redux/thunks/savedFilmsThunks';
 
 const Saved = () => {
-  const { savedFilms, isChanged } = useSelector(selectSaved);
+  const { savedFilms, isChanged, filteredFilms } = useSelector(selectSaved);
   const dispatch = useDispatch<AppDispatch>();
   const { isChecked } = useSelector(selectFilms);
 
   useEffect(() => {
     dispatch(getSaved());
-  }, [isChanged]);
-
-  const shortArray = savedFilms.filter((i) => i.duration <= 40);
+  }, [isChanged, dispatch]);
 
   return (
     <div className="saved">
@@ -24,8 +22,8 @@ const Saved = () => {
         <ul className="saved__container">
           {!savedFilms.length && <p>У вас нет сохранённых фильмов</p>}
           {isChecked ? (
-            shortArray.length ? (
-              shortArray.map((item: TFilm, i: number) => (
+            filteredFilms.length ? (
+              filteredFilms.map((item: TFilm, i: number) => (
                 <Card key={i} item={item} />
               ))
             ) : (

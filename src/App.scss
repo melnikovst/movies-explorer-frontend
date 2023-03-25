@@ -1,8 +1,9 @@
 .App {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   height: 100%;
+  min-height: 500px;
+
   &_scroll {
     position: fixed;
     overflow-y: scroll;

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './Profile.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsAsideOpen } from '../../redux/tooltipSlice';
@@ -31,6 +30,8 @@ const Profile = () => {
     dispatch(setIsFirst(true));
     dispatcher(signout());
     localStorage.clear();
+    sessionStorage.clear();
+    window.location.reload();
     console.log('успешно вышли');
   };
 

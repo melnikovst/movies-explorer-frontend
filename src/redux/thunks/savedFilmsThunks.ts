@@ -50,3 +50,5 @@ export const deleteSaved = createAsyncThunk<any, any>(
     return Promise.reject(await res.json());
   }
 );
+
+export const filterSaved = createAction('filter');

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import {
   getProfile,
@@ -13,6 +13,7 @@ type TStates = {
   profileData: Partial<IGet>;
   pname: string;
   pemail: string;
+  isLoading: boolean;
 };
 
 const initialState: TStates = {
@@ -20,6 +21,7 @@ const initialState: TStates = {
   profileData: {},
   pname: '',
   pemail: '',
+  isLoading: false,
 };
 
 const formSlice = createSlice({
@@ -31,6 +33,9 @@ const formSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(getProfile.pending, (state) => {
+      state.isLoading = true;
+    });
     builder.addCase(login.fulfilled, (state) => {
       state.isLogged = true;
     });
@@ -46,6 +51,10 @@ const formSlice = createSlice({
       state.isLogged = true;
       state.pname = action.payload.name;
       state.pemail = action.payload.email;
+      state.isLoading = false;
+    });
+    builder.addCase(getProfile.rejected, (state) => {
+      state.isLoading = false;
     });
     builder.addCase(signout.fulfilled, (state) => {
       state.profileData = {};

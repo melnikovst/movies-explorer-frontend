@@ -11,6 +11,7 @@ import {
 } from '../../../redux/filmsSlice';
 import { AppDispatch } from '../../../redux/store';
 import { useLocation } from 'react-router-dom';
+import { filterSaved } from '../../../redux/thunks/savedFilmsThunks';
 
 const SearchForm = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -38,6 +39,8 @@ const SearchForm = () => {
     }
   };
 
+  console.log(isChecked);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const data = await getData();
@@ -50,7 +53,7 @@ const SearchForm = () => {
     localStorage.setItem('checkbox', JSON.stringify(!isChecked));
   };
 
-  console.log(pathname);
+  console.log(isChecked);
 
   return (
     <section className="search">
@@ -71,7 +74,7 @@ const SearchForm = () => {
               search__error_active: '' /* !isValid */,
             })}
           >
-            {/* {errors.regName} */}
+            {/* {errors.name} */}
           </span>
           <button
             type="submit"
@@ -82,9 +85,16 @@ const SearchForm = () => {
             <label className="toggler-wrapper">
               <input
                 type="checkbox"
-                onChange={handleCheckbox}
+                onChange={
+                  pathname === '/films/saved'
+                    ? () => {
+                        dispatch(filterSaved());
+                        dispatch(setIsChecked(!isChecked));
+                      }
+                    : handleCheckbox
+                }
                 checked={isChecked}
-                disabled={!isFirstRequest}
+                disabled={!isFirstRequest && pathname !== '/films/saved'}
               />
               <div className="toggler-slider">
                 <div className="toggler-knob"></div>
