@@ -1,7 +1,7 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getSaved = createAsyncThunk<any>('/movies', async () => {
-  const res = await fetch('http://localhost:3001/movies', {
+  const res = await fetch('https://api.mvies.nomoredomains.work/movies', {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -17,7 +17,7 @@ export const getSaved = createAsyncThunk<any>('/movies', async () => {
 export const postSaved = createAsyncThunk<any, any>(
   '/movies.',
   async (card: any) => {
-    const res = await fetch('http://localhost:3001/movies', {
+    const res = await fetch('https://api.mvies.nomoredomains.work/movies', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,13 +36,16 @@ export const postSaved = createAsyncThunk<any, any>(
 export const deleteSaved = createAsyncThunk<any, any>(
   '/movies/delete',
   async (card: any) => {
-    const res = await fetch(`http://localhost:3001/movies/${card._id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    });
+    const res = await fetch(
+      `https://api.mvies.nomoredomains.work/movies/${card._id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      }
+    );
     if (res.ok) {
       const data = await res.json();
       return data;

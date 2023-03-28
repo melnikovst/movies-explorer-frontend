@@ -20,5 +20,5 @@ const tooltipSlice = createSlice({
   },
 });
 
-export const { setIsAsideOpen, } = tooltipSlice.actions;
+export const { setIsAsideOpen } = tooltipSlice.actions;
 export default tooltipSlice.reducer;
