@@ -5,13 +5,14 @@ import {
   IGet,
   login,
   register,
+  setProfile,
   signout,
 } from './thunks/formThunks';
 
 type TStates = {
   isLogged: boolean;
   profileData: Partial<IGet>;
-  pname: string;
+  pname: string | undefined;
   pemail: string;
   isLoading: boolean;
 };
@@ -61,6 +62,9 @@ const formSlice = createSlice({
       state.pname = '';
       state.pemail = '';
       state.isLogged = false;
+    });
+    builder.addCase(setProfile, (state, action) => {
+      state.pname = action.payload;
     });
   },
 });

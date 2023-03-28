@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 interface IResponse extends IGet {
   password?: string;
@@ -10,7 +10,7 @@ type TReg = {
 };
 
 export interface IGet {
-  name: string;
+  name?: string;
   email?: string;
 }
 
@@ -78,3 +78,5 @@ export const getProfile = createAsyncThunk<any>('/me', async () => {
   }
   return Promise.reject('ошибка получения профиля');
 });
+
+export const setProfile = createAction<string | undefined>('profiler');

@@ -7,7 +7,7 @@ import cn from '../../utils/cn';
 import { AppDispatch } from '../../redux/store';
 import { selectForm } from '../../redux/formSlice';
 import { setIsFirst } from '../../redux/filmsSlice';
-import { signout } from '../../redux/thunks/formThunks';
+import { setProfile, signout } from '../../redux/thunks/formThunks';
 
 const Profile = () => {
   const { pname, pemail } = useSelector(selectForm);
@@ -25,6 +25,10 @@ const Profile = () => {
     dispatch(setIsAsideOpen(false));
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(setProfile(values.name));
+  }, []);
+
   const handleExit = async () => {
     dispatch(setIsFirst(true));
     await dispatch(signout());
@@ -34,7 +38,7 @@ const Profile = () => {
     console.log('успешно вышли');
   };
 
-  const onUpdate = async (name: string, email?: string) => {
+  const onUpdate = async (name?: string, email?: string) => {
     const res = await fetch('http://localhost:3001/users/me', {
       method: 'PATCH',
       headers: {

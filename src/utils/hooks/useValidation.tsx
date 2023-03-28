@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 
 type Values = {
   email?: string;
-  name: string;
+  name?: string;
   password?: string;
   id?: string;
 };
