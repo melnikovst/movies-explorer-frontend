@@ -1,39 +1,110 @@
 import './Form.scss';
-import useFormAndValidation from '../../../utils/hooks/useValidation';
 import cn from '../../../utils/cn';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchFilms,
+  selectFilms,
+  setFilms,
+  setIsFirst,
+  setValue,
+  setIsChecked,
+} from '../../../redux/filmsSlice';
+import { AppDispatch } from '../../../redux/store';
+import { useLocation } from 'react-router-dom';
+import { filterSaved } from '../../../redux/thunks/savedFilmsThunks';
+import { useState } from 'react';
 
 const SearchForm = () => {
-  const { isValid, errors, values, handleChange, handleBlur } =
-    useFormAndValidation();
+  const dispatch = useDispatch<AppDispatch>();
+  const { value, isChecked, isFirstRequest } = useSelector(selectFilms);
+  const { pathname } = useLocation();
+  const [flag, setFlag] = useState<boolean>(false);
 
-  const handleValidation = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChange(e);
-    handleBlur(e);
+  const getData = async () => {
+    const data = JSON.parse(localStorage.getItem('films') as string);
+    if (!data) {
+      try {
+        dispatch(setIsFirst(true));
+        const { payload } = await dispatch(fetchFilms());
+        if (!payload) {
+          console.log('Всё сломалося!');
+          return;
+        }
+        localStorage.setItem('films', JSON.stringify(payload));
+        localStorage.setItem('requestText', JSON.stringify(value));
+        return payload;
+      } catch (error) {
+        console.log(`я ошибка ${error}`);
+      }
+    }
+    if (data) {
+      const filtered = data.filter((item: TFilm) =>
+        item.nameRU.includes(value)
+      );
+      localStorage.setItem('filtered', JSON.stringify(filtered));
+      localStorage.setItem('requestText', JSON.stringify(value));
+      return data;
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!value.length) {
+      setFlag(true);
+      setTimeout(() => setFlag(false), 2000);
+      return;
+    }
+    const data = await getData();
+    dispatch(setFilms(data));
+  };
+
+  const handleCheckbox = () => {
+    if (!isFirstRequest) return;
+    dispatch(setIsChecked(!isChecked));
+    localStorage.setItem('checkbox', JSON.stringify(!isChecked));
   };
 
   return (
     <section className="search">
       <div className="search__inner">
-        <form className="search__form">
+        <form onSubmit={handleSubmit} className="search__form" noValidate>
           <div className="search__image" />
           <input
             type="text"
             placeholder="Фильм"
             className="search__input"
-            id="regName"
+            id="name"
             required
-            defaultValue={values.name}
-            onChange={handleValidation}
+            value={value || ''}
+            onChange={(e) => dispatch(setValue(e.target.value))}
           />
           <span
-            className={cn('search__error', { search__error_active: !isValid })}
+            className={cn('search__error', {
+              search__error_active: flag,
+            })}
           >
-            {errors.regName}
+            Введите запрос для поиска
           </span>
-          <button className="search__btn" />
+          <button
+            type="submit"
+            className="search__btn"
+            disabled={pathname === '/films/saved'}
+          />
           <div className="search__wrapper">
             <label className="toggler-wrapper">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onChange={
+                  pathname === '/films/saved'
+                    ? () => {
+                        dispatch(filterSaved());
+                        dispatch(setIsChecked(!isChecked));
+                      }
+                    : handleCheckbox
+                }
+                checked={isChecked}
+                disabled={!isFirstRequest && pathname !== '/films/saved'}
+              />
               <div className="toggler-slider">
                 <div className="toggler-knob"></div>
               </div>

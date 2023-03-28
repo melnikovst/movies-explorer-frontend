@@ -1,28 +1,117 @@
 import './Grid.scss';
 import Card from '../Card/Card';
-import { useState } from 'react';
+import { memo, useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  concatMore,
+  selectFilms,
+  setFiltered,
+  setFilteredArray,
+  setIsChecked,
+  setIsFirst,
+  setLoad,
+  setValue,
+} from '../../../redux/filmsSlice';
+import { useResize } from '../../../utils/hooks/useResize';
+import { AppDispatch } from '../../../redux/store';
+import { getSaved } from '../../../redux/thunks/savedFilmsThunks';
 
-const Grid = () => {
-  const cardArray = [...Array(16)].map((_, i) => <Card key={i} />);
-  const [load, setLoad] = useState(cardArray);
+const Grid = memo(() => {
+  const { width } = useResize();
+  const { films, load, value, filteredArray, isFirstRequest } =
+    useSelector(selectFilms);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const loadMore = () => {
-    setLoad((state) => [
-      ...state,
-      ...[...Array(4)].map((_) => <Card key={Math.random()} />),
-    ]);
+  useEffect(() => {
+    dispatch(getSaved());
+  }, []);
+
+  const getCardsCount = useCallback((): number => {
+    if (width < 1290 && width > 1008) {
+      return 12;
+    }
+    if (width < 1007 && width > 630) {
+      return 8;
+    }
+    if (width < 629) {
+      return 5;
+    } else return 16;
+  }, [width]);
+
+  const cardsCount = getCardsCount();
+
+  const handleMore = (): number => {
+    if (width < 1290 && width >= 1008) {
+      return 3;
+    }
+    if (width < 1008) {
+      return 2;
+    } else return 4;
   };
+
+  const columns = handleMore();
+
+  useEffect(() => {
+    if (localStorage.getItem('films') && !localStorage.getItem('filtered')) {
+      dispatch(setIsFirst(true));
+      dispatch(setFilteredArray(value));
+    }
+    if (localStorage.getItem('filtered')) {
+      dispatch(setIsFirst(true));
+      dispatch(
+        setFiltered(JSON.parse(localStorage.getItem('filtered') as string))
+      );
+      dispatch(
+        setValue(JSON.parse(localStorage.getItem('requestText') as string))
+      );
+    }
+  }, [films]);
+
+  console.log(JSON.parse(localStorage.getItem('boolean') as string));
+
+  useEffect(() => {
+    if (filteredArray.length) {
+      dispatch(setLoad(filteredArray.slice(0, cardsCount)));
+      localStorage.setItem('filtered', JSON.stringify(filteredArray));
+      console.log('effect from app');
+    }
+  }, [filteredArray]);
 
   return (
     <section className="grid">
       <div className="grid__inner">
-        <ul className="grid__container">{load}</ul>
-        <button onClick={loadMore} className="grid__button">
+        <ul
+          className="grid__container"
+          style={
+            load.length === filteredArray.length ||
+            !isFirstRequest ||
+            load.length === 0 ||
+            !filteredArray.length
+              ? { paddingBottom: '159px' }
+              : {}
+          }
+        >
+          {!filteredArray.length
+            ? 'Введите запрос для поиска'
+            : load.map((item, i) => <Card item={item} key={i} />)}
+        </ul>
+        <button
+          onClick={() => dispatch(concatMore(columns))}
+          style={
+            load.length === filteredArray.length ||
+            !isFirstRequest ||
+            load.length === 0 ||
+            !filteredArray.length
+              ? { display: 'none' }
+              : { display: 'block' }
+          }
+          className="grid__button"
+        >
           Ещё
         </button>
       </div>
     </section>
   );
-};
+});
 
 export default Grid;

@@ -1,42 +1,66 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../Register/Register.scss';
 import useFormAndValidation from '../../utils/hooks/useValidation';
 import React from 'react';
 import cn from '../../utils/cn';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store';
+import { setIsLogged } from '../../redux/formSlice';
+import { login } from '../../redux/thunks/formThunks';
 
 const Login = () => {
+  const obj = {
+    name: '',
+    email: '',
+    password: '',
+  };
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const { values, handleChange, errors, isValid, handleBlur } =
-    useFormAndValidation();
+    useFormAndValidation(obj);
+  console.log(values);
 
   const handleValidation = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChange(e);
     handleBlur(e);
   };
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      dispatch(login({ email: values.email, password: values.password }));
+      dispatch(setIsLogged(true));
+      navigate('/films');
+    } catch (error) {
+      console.log('аззааз');
+    }
+  };
+
   return (
     <section className="register">
       <h2 className="register__title">Рады видеть!</h2>
-      <form className="form">
+      <form onSubmit={onSubmit} className="form" noValidate>
         <fieldset className="fieldset">
-          <label htmlFor="regEmail" className="form__label">
+          <label htmlFor="email" className="form__label">
             Email
           </label>
           <input
             type="email"
-            id="regEmail"
+            id="email"
             className="form__input"
             placeholder="Email"
-            onChange={handleValidation}
+            onChange={(e) => handleChange(e)}
             defaultValue={values.email}
           />
           <span className={cn('form__error', { form__error_active: !isValid })}>
             {errors.regEmail}
           </span>
-          <label htmlFor="regPassword" className="form__label">
+          <label htmlFor="password" className="form__label">
             Пароль
           </label>
           <input
             type="password"
-            id="regPassword"
+            id="password"
             className="form__input form__input_type_auth"
             placeholder="Пароль"
             defaultValue={values.password}
@@ -47,7 +71,9 @@ const Login = () => {
             Что-то пошло не так...
           </span>
         </fieldset>
-        <button className="form__button">Войти</button>
+        <button disabled={!isValid} className="form__button">
+          Войти
+        </button>
       </form>
       <p className="register__caption">
         Уже зарегестрированы?

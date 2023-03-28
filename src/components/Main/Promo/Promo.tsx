@@ -2,8 +2,12 @@ import logo from './images/header-main-logo.png';
 import './Promo.scss';
 import { NavLink } from 'react-router-dom';
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { selectForm } from '../../../redux/formSlice';
 
 const Promo: FC = () => {
+  const { isLogged } = useSelector(selectForm);
+
   return (
     <header className="promo">
       <div className="promo__inner">
@@ -12,14 +16,18 @@ const Promo: FC = () => {
           <nav>
             <ul className="promo__navContainer">
               <li>
-                <NavLink className="promo__navButton" to={'/'}>
+                <NavLink
+                  className="promo__navButton"
+                  style={isLogged ? { display: 'none' } : {}}
+                  to={'/sign-up'}
+                >
                   Регистрация
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   className="promo__navButton promo__navButtonActive"
-                  to={'/films'}
+                  to={isLogged ? '/films' : '/sign-in'}
                 >
                   Войти
                 </NavLink>

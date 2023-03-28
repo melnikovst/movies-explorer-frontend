@@ -1,4 +1,4 @@
-import React, { LegacyRef } from 'react';
+import React, { LegacyRef, useState } from 'react';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import './Techs.scss';
 import TechsButton from './TechsButton/TechsButton';
@@ -9,9 +9,6 @@ import sass from './sass.png';
 import html from './HTML.png';
 import express from './express.jpeg';
 import mongo from './mongodb.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { setIsTechOpen } from '../../../redux/tooltipSlice';
 import cn from '../../../utils/cn';
 
 const btns: { title: string; img: string }[] = [
@@ -48,11 +45,10 @@ const btns: { title: string; img: string }[] = [
 const Techs: React.FC<{
   navigateToStack: LegacyRef<HTMLElement>;
 }> = ({ navigateToStack }) => {
-  const dispatch = useDispatch();
+  const [isTechOpen, setIsTechOpen] = useState<number | null>(null);
   const handleClick = (index: number): void => {
-    dispatch(setIsTechOpen(index));
+    setIsTechOpen(index);
   };
-  const { isTechOpen } = useSelector((state: RootState) => state.tooltipSlice);
 
   return (
     <section ref={navigateToStack} className="techs">
@@ -72,6 +68,7 @@ const Techs: React.FC<{
                 onHandleClick={() => {
                   handleClick(i);
                 }}
+                setIsTechOpen={setIsTechOpen}
                 key={i}
                 title={text.title}
                 img={text.img}

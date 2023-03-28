@@ -5,8 +5,9 @@ import AccKey from './AccKey.svg';
 import Burger from '../Burger/Burger';
 import BurgerTooltip from '../Burger/BurgerTooltip';
 import cn from '../../../utils/cn';
+import { memo } from 'react';
 
-const Header = () => {
+const Header = memo(() => {
   const { pathname } = useLocation();
   const handleHeader = (): string => {
     if (pathname === '/sign-in') return 'header_type_forms';
@@ -39,7 +40,12 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link to={'/films/saved'} className="header__link">
+                <Link
+                  to={'/films/saved'}
+                  className={cn('header__link', {
+                    header__link_hidden: pathname === '/films/saved',
+                  })}
+                >
                   Сохранённые фильмы
                 </Link>
               </li>
@@ -57,6 +63,6 @@ const Header = () => {
       </div>
     </header>
   );
-};
+});
 
 export default Header;

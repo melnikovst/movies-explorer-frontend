@@ -1,0 +1,22 @@
+@keyframes spinner-circle {
+  0% {
+    transform: rotate(-180deg);
+  }
+
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+.loader {
+  background-image: url('./loader.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  animation: spinner-circle 0.7s ease-in infinite;
+}

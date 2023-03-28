@@ -1,22 +1,66 @@
 import './Card.scss';
-import image from './card.png';
-import { useState } from 'react';
+import { FC } from 'react';
 import cn from '../../../utils/cn';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '../../../redux/store';
+import { useLocation } from 'react-router-dom';
+import { selectSaved } from '../../../redux/savedFilmsSlice';
+import { deleteSaved, postSaved } from '../../../redux/thunks/savedFilmsThunks';
 
-const Card = () => {
-  const [liked, setLiked] = useState<boolean>(false);
+const Card: FC<{ item: any }> = ({ item }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { pathname } = useLocation();
+  const { savedFilms } = useSelector(selectSaved);
+
+  const matched = savedFilms.some((i) => i.nameRU === item.nameRU);
+  const saveCard = () => {
+    const card = {
+      movieId: item.id,
+      country: item.country,
+      director: item.director,
+      nameRU: item.nameRU,
+      nameEN: item.nameEN,
+      description: item.description,
+      image: `https://api.nomoreparties.co${item.image.url}`,
+      duration: item.duration,
+      trailerLink: item.trailerLink,
+      thumbnail: `https://api.nomoreparties.co/beatfilm-movies${item.image.formats.thumbnail.url}`,
+      year: item.year,
+    };
+    dispatch(postSaved(card));
+  };
+
+  const isSaved = pathname === '/films/saved';
 
   return (
     <li className="card">
-      <img src={image} alt="Card preview" className="card__image" />
+      <img
+        src={
+          pathname === '/films/saved'
+            ? item.image
+            : `https://api.nomoreparties.co${item.image.url}`
+        }
+        alt="Card preview"
+        className="card__image"
+      />
       <div className="card__wrapper">
-        <p className="card__description">33 слова о дизайне</p>
+        <p className="card__description">{item.nameRU}</p>
         <button
-          onClick={() => setLiked(!liked)}
-          className={cn('card__like', { card__like_active: liked })}
+          onClick={isSaved ? () => dispatch(deleteSaved(item)) : saveCard}
+          className={cn('card__btn', {
+            card__like_active: matched,
+            card__delete: isSaved,
+            card__like: !isSaved,
+          })}
+          disabled={pathname === '/films' ? matched : false}
         />
       </div>
-      <p className="card__duration">1ч42м</p>
+      <p className="card__duration">
+        {Math.floor(item.duration / 60) > 0
+          ? `${Math.floor(item.duration / 60)}ч`
+          : null}
+        {item.duration % 60}м
+      </p>
     </li>
   );
 };

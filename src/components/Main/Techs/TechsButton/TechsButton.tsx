@@ -1,7 +1,4 @@
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../redux/store';
-import { setIsTechOpen } from '../../../../redux/tooltipSlice';
 import './TechsButton.scss';
 
 interface ITButton {
@@ -10,6 +7,7 @@ interface ITButton {
   onHandleClick: () => void;
   img: string;
   imgClasses: string;
+  setIsTechOpen: (i: null) => void;
 }
 
 const TechsButton: FC<ITButton> = ({
@@ -18,14 +16,15 @@ const TechsButton: FC<ITButton> = ({
   onHandleClick,
   img,
   imgClasses,
+  setIsTechOpen
 }) => {
-  const dispatch = useDispatch();
+
   return (
     <li onClick={onHandleClick} className={classes}>
       <img
         onClick={(e) => {
           e.stopPropagation();
-          dispatch(setIsTechOpen(null));
+          setIsTechOpen(null);
         }}
         className={imgClasses}
         src={img}
