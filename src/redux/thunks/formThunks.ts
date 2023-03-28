@@ -17,7 +17,7 @@ export interface IGet {
 export const login = createAsyncThunk<any, TReg>(
   'login',
   async ({ email, password }) => {
-    const res = await fetch('https://mvies.nomoredomains.work/signin', {
+    const res = await fetch('https://api.mvies.nomoredomains.work/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -33,7 +33,7 @@ export const login = createAsyncThunk<any, TReg>(
 );
 
 export const signout = createAsyncThunk<any>('/signout', async () => {
-  const res = await fetch('https://mvies.nomoredomains.work/signout', {
+  const res = await fetch('https://api.mvies.nomoredomains.work/signout', {
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
   });
@@ -49,7 +49,7 @@ export const register = createAsyncThunk<IGet, IResponse>(
   'register',
   async ({ name, email, password }: IResponse) => {
     try {
-      const res = await fetch('https://mvies.nomoredomains.work/signup', {
+      const res = await fetch('https://api.mvies.nomoredomains.work/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -68,7 +68,7 @@ export const register = createAsyncThunk<IGet, IResponse>(
 );
 
 export const getProfile = createAsyncThunk<any>('/me', async () => {
-  const res = await fetch('https://mvies.nomoredomains.work/users/me', {
+  const res = await fetch('https://api.mvies.nomoredomains.work/users/me', {
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
   });

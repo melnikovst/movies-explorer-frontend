@@ -39,7 +39,7 @@ const Profile = () => {
   };
 
   const onUpdate = async (name?: string, email?: string) => {
-    const res = await fetch('https://mvies.nomoredomains.work/users/me', {
+    const res = await fetch('https://api.mvies.nomoredomains.work/users/me', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
