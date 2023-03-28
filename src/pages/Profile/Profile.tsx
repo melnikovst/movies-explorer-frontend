@@ -18,8 +18,7 @@ const Profile = () => {
 
   console.log(pname);
 
-  const dispatch = useDispatch();
-  const dispatcher = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
   const { values, handleChange, handleBlur, errors, isValid } =
     useFormAndValidation(obj);
   useEffect(() => {
@@ -28,7 +27,7 @@ const Profile = () => {
 
   const handleExit = async () => {
     dispatch(setIsFirst(true));
-    dispatcher(signout());
+    await dispatch(signout());
     localStorage.clear();
     sessionStorage.clear();
     window.location.reload();
