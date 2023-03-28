@@ -30,7 +30,8 @@ function App() {
 
   useEffect(() => {
     try {
-      dispatch(getProfile()).then(() => navigate('/films'));
+      dispatch(getProfile());
+      navigate('/films');
     } catch (error) {
       navigate('/');
     }
