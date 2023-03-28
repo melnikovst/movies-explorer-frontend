@@ -27,7 +27,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(setProfile(values.name));
-  }, []);
+  }, [values.name]);
 
   const handleExit = async () => {
     dispatch(setIsFirst(true));
@@ -39,7 +39,7 @@ const Profile = () => {
   };
 
   const onUpdate = async (name?: string, email?: string) => {
-    const res = await fetch('http://localhost:3001/users/me', {
+    const res = await fetch('https://mvies.nomoredomains.work/users/me', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

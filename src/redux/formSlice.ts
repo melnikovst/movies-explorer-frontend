@@ -64,6 +64,7 @@ const formSlice = createSlice({
       state.isLogged = false;
     });
     builder.addCase(setProfile, (state, action) => {
+      console.log(action.payload);
       state.pname = action.payload;
     });
   },
