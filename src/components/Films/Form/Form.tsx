@@ -26,10 +26,16 @@ const SearchForm = () => {
       try {
         dispatch(setIsFirst(true));
         const { payload } = await dispatch(fetchFilms());
+        if (!payload) {
+          console.log('Всё сломалося!');
+          return;
+        }
         localStorage.setItem('films', JSON.stringify(payload));
         localStorage.setItem('requestText', JSON.stringify(value));
         return payload;
-      } catch (error) {}
+      } catch (error) {
+        console.log(`я ошибка ${error}`);
+      }
     }
     if (data) {
       const filtered = data.filter((item: TFilm) =>
