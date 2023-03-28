@@ -24,7 +24,9 @@ export const fetchFilms = createAsyncThunk<
   undefined,
   { rejectValue: string }
 >('films/data', async (_, { rejectWithValue }) => {
-  const res = await fetch('https://api.nomoreparties.co/beatfilm-movies');
+  const res = await fetch('https://api.nomoreparties.co/beatfilm-movies', {
+    headers: { 'Content-Type': 'application/json' },
+  });
   if (!res.ok) {
     return rejectWithValue('Что-то пошло не так');
   }
